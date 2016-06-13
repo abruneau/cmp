@@ -32,6 +32,10 @@ module.exports = function(config) {
       'bower_components/gentelella/build/js/custom.min.js',
       'bower_components/iCheck/icheck.min.js',
       'bower_components/bootstrap-progressbar/bootstrap-progressbar.js',
+      'bower_components/jsforce/build/jsforce.js',
+      'bower_components/nedb/browser-version/out/nedb.min.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/storedb/storedb.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

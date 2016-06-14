@@ -1,14 +1,13 @@
-<form name="form" role="form" ng-submit="saveSf(sf)">
+<form name="form" role="form" ng-submit="saveSf(sf)" novalidate>
 	<div class="form-group">
-		<label for="loginUrl" class="control-label">Login Url
-			{{sf.loginUrl}}</label>
+		<label for="loginUrl" class="control-label">Login Url</label>
 		<input ng-model="sf.loginUrl" type="url" class="form-control" id="loginUrl">
 	</div>
-	<div class="form-group">
+	<div class="form-group" ng-class="{ 'has-error': form.email.$invalid, 'has-success':  form.email.$valid}">
 		<label for="email" class="control-label">Email address</label>
 		<div class="input-group">
 			<span class="input-group-addon">@</span>
-			<input ng-model="sf.email" type="email" class="form-control" id="email">
+			<input ng-model="sf.email" type="email" class="form-control" id="email" required="">
 		</div>
 		<div ng-show="form.$submitted || form.email.$touched">
 			<span id="helpEmail" class="help-block" ng-show="form.email.$error.required">Tell us your email.</span>
@@ -25,7 +24,8 @@
 	</div>
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary">Update</button>
+		<div class="pull-right text-success" ng-if="connected">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Connection is valid
+		</div>
 	</div>
 </form>
-
-{{connected}}

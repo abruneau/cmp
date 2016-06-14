@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: navigation', function () {
+describe('Directive: sidebar', function () {
 
   // load the directive's module
   beforeEach(module('cmpApp'));
@@ -13,8 +13,8 @@ describe('Directive: navigation', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<navigation></navigation>');
+    element = angular.element('<sidebar></sidebar>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the navigation directive');
+    expect(element.text()).toBe('this is the sidebar directive');
   }));
 });

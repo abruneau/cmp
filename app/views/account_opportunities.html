@@ -1,0 +1,41 @@
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Opportunity List</h2>
+		<ul class="nav navbar-right panel_toolbox">
+			<li>
+				<a ng-click="updateOpportunities()">
+					<i class="fa fa-refresh"></i>
+				</a>
+			</li>
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+		<div class="" role="tabpanel" data-example-id="togglable-tabs">
+			<table class="table table-striped">
+			  <thead>
+				<tr>
+				  <th>#</th>
+				  <th>Name</th>
+				  <th>StageName</th>
+				  <th>Amount</th>
+				  <th>ForecastCategory</th>
+				  <th>ForecastCategoryName</th>
+				  <th>Fiscal</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr ng-repeat="opport in opportunities">
+				  <th scope="row">{{ $index + 1 }}</th>
+				  <td>{{opport.Name}}</td>
+				  <td>{{opport.StageName}}</td>
+				  <td>{{opport.Amount}}</td>
+				  <td>{{opport.ForecastCategory}}</td>
+				  <td>{{opport.ForecastCategoryName}}</td>
+				  <td>{{opport.Fiscal}}</td>
+				</tr>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+</div>

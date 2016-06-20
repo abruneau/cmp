@@ -1,0 +1,136 @@
+<div class="x_panel">
+	<div class="x_content">
+		<div class="row">
+			<div class="col-sm-3 mail_list_column">
+				<button id="compose" class="btn btn-sm btn-success btn-block" type="button">COMPOSE</button>
+				<div ng-repeat="note in noteList track by $index">
+					<a ng-click="loadNote(note.noteLink)">
+						<div class="mail_list">
+							<div class="left"></div>
+							<div class="right">
+								<h3>{{note.title}}
+									<small>{{formatDate(note.creationDate)}}</small>
+								</h3>
+								<p>{{note.noteLink}}</p>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<!-- /MAIL LIST -->
+
+			<!-- CONTENT MAIL -->
+			<div class="col-sm-9 mail_view">
+				<div class="inbox-body">
+					<div class="mail_heading row">
+						<div class="col-md-8">
+							<div class="btn-group">
+								<button class="btn btn-sm btn-primary" type="button">
+									<i class="fa fa-reply"></i>
+									Reply</button>
+								<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Forward">
+									<i class="fa fa-share"></i>
+								</button>
+								<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print">
+									<i class="fa fa-print"></i>
+								</button>
+								<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
+									<i class="fa fa-trash-o"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-md-4 text-right">
+							<p class="date">
+								{{formatDate(note.creationDate)}}</p>
+						</div>
+						<div class="col-md-12">
+							<h4>{{note.title}}</h4>
+						</div>
+					</div>
+					<div class="view-mail">
+						<p ng-bind-html="html"></p>
+					</div>
+					<!-- <div class="attachment">
+						<p>
+							<span>
+								<i class="fa fa-paperclip"></i>
+								3 attachments —
+							</span>
+							<a href="#">Download all attachments</a>
+							|
+							<a href="#">View all images</a>
+						</p>
+						<ul>
+							<li>
+								<a href="#" class="atch-thumb">
+									<img src="images/1.png" alt="img"/>
+								</a>
+
+								<div class="file-name">
+									image-name.jpg
+								</div>
+								<span>12KB</span>
+
+								<div class="links">
+									<a href="#">View</a>
+									-
+									<a href="#">Download</a>
+								</div>
+							</li>
+
+							<li>
+								<a href="#" class="atch-thumb">
+									<img src="images/1.png" alt="img"/>
+								</a>
+
+								<div class="file-name">
+									img_name.jpg
+								</div>
+								<span>40KB</span>
+
+								<div class="links">
+									<a href="#">View</a>
+									-
+									<a href="#">Download</a>
+								</div>
+							</li>
+							<li>
+								<a href="#" class="atch-thumb">
+									<img src="images/1.png" alt="img"/>
+								</a>
+
+								<div class="file-name">
+									img_name.jpg
+								</div>
+								<span>30KB</span>
+
+								<div class="links">
+									<a href="#">View</a>
+									-
+									<a href="#">Download</a>
+								</div>
+							</li>
+
+						</ul>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-sm btn-primary" type="button">
+							<i class="fa fa-reply"></i>
+							Reply</button>
+						<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Forward">
+							<i class="fa fa-share"></i>
+						</button>
+						<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print">
+							<i class="fa fa-print"></i>
+						</button>
+						<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
+							<i class="fa fa-trash-o"></i>
+						</button>
+					</div> -->
+				</div>
+
+			</div>
+			<!-- /CONTENT MAIL -->
+		</div>
+	</div>
+</div>

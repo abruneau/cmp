@@ -31,6 +31,10 @@ angular.module('cmpApp').controller('ProfileCtrl', function (salesForce, $scope)
 		salesForce.updateIndentity();
 	};
 
+	$scope.getDesc = function () {
+		salesForce.getDesc();
+	};
+
 	salesForce.registerObserverCallback(updateSf);
 
 });

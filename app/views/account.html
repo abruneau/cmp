@@ -1,0 +1,48 @@
+<div class="row">
+
+	<h3>{{account.Name}}
+		<small>{{account.Industry}}</small>
+		<small ng-if="account.IsPartner">(Parner)</small>
+		<small>
+			|
+			{{account.Type}}</small>
+	</h3>
+
+</div>
+<div class="row" ng-if="account.BillingStreet">
+	<i class="fa fa-map-marker"></i>
+	{{account.BillingStreet}},
+	{{account.BillingPostalCode}}
+	{{account.BillingCity}},
+	{{account.BillingCountry}}
+</div>
+<div class="row tile_count">
+	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+		<span class="count_top">Annual Revenue</span>
+		<div class="count">{{account.AnnualRevenue}}</div>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+		<span class="count_top">
+			<i class="fa fa-user"></i>
+			Number Of Employees</span>
+		<div class="count">{{account.NumberOfEmployees}}</div>
+	</div>
+</div>
+
+<br/>
+
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<uib-tabset>
+			<uib-tab index="0" heading="Infos">
+				<div class="" ng-include=" 'views/account_info.html' "></div>
+			</uib-tab>
+			<uib-tab index="1" heading="{{opportunities.length}} Opportunities">
+				<div class="" ng-include=" 'views/account_opportunities.html' "></div>
+			</uib-tab>
+			<uib-tab index="2" heading="Notes">
+				<notes></notes>
+			</uib-tab>
+		</uib-tabset>
+	</div>
+</div>

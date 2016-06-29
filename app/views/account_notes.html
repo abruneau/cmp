@@ -2,16 +2,19 @@
 	<div class="x_content">
 		<div class="row">
 			<div class="col-sm-3 mail_list_column">
-				<button id="compose" class="btn btn-sm btn-success btn-block" type="button">COMPOSE</button>
+				<button id="compose" type="button" class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target="#myModal">
+					COMPOSE
+				</button>
+				<!-- <button id="compose" class="btn btn-sm btn-success btn-block" type="button">COMPOSE</button> -->
 				<div ng-repeat="note in noteList track by $index">
-					<a ng-click="loadNote(note.noteLink)">
+					<a ng-click="loadNote(note)">
 						<div class="mail_list">
 							<div class="left"></div>
 							<div class="right">
 								<h3>{{note.title}}
 									<small>{{formatDate(note.creationDate)}}</small>
 								</h3>
-								<p>{{note.noteLink}}</p>
+								<p></p>
 							</div>
 						</div>
 					</a>
@@ -25,17 +28,17 @@
 					<div class="mail_heading row">
 						<div class="col-md-8">
 							<div class="btn-group">
-								<button class="btn btn-sm btn-primary" type="button">
-									<i class="fa fa-reply"></i>
-									Reply</button>
-								<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Forward">
-									<i class="fa fa-share"></i>
+								<button ng-click="save(note)" class="btn btn-sm btn-default" type="button">
+									<i class="fa fa-floppy-o"></i>
 								</button>
-								<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print">
+								<!-- <button ng-click="updateHtml()" class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print">
 									<i class="fa fa-print"></i>
-								</button>
-								<button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
+								</button> -->
+								<button ng-click="deleteNote(note)" class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
 									<i class="fa fa-trash-o"></i>
+								</button>
+								<button ng-click="changeEditMode()" class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash">
+									<i class="fa fa-pencil"></i>
 								</button>
 							</div>
 						</div>
@@ -48,7 +51,20 @@
 						</div>
 					</div>
 					<div class="view-mail">
-						<p ng-bind-html="html"></p>
+						<div class="text-center" ng-if="!notebookExists">
+							Notebook
+							{{account.Name}}
+							doesn't exits.
+							<br/>
+							<br/>
+							<button ng-click="createNotebook()" class="btn btn-sm btn-success" type="button">Create Notebook</button>
+						</div>
+
+						<p ng-if="!editMode" ng-bind-html="html"></p>
+						<p ng-if="editMode" ng-include=" 'views/account_note_edit.html' "></p>
+						<!-- <p ng-class="!editMode ? 'hidden' : 'show'" id="epiceditor">
+							<textarea id="my-edit-area" ng-model="md"></textarea>
+						</p> -->
 					</div>
 					<!-- <div class="attachment">
 						<p>
@@ -131,6 +147,31 @@
 
 			</div>
 			<!-- /CONTENT MAIL -->
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Create a new note</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Note Title</label>
+						<input type="text" ng-model="newNoteTitle" class="form-control">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" ng-click="createNote()" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+			</div>
 		</div>
 	</div>
 </div>

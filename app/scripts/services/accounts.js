@@ -28,6 +28,7 @@ angular.module('cmpApp').factory('Accounts', function (database) {
 		}, {
 			Name: 1,
 			Id: 1,
+			Industry: 1,
 			_id: 0
 		}, function (err, docs) {
 			if (err) {

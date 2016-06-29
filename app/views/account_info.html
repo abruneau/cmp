@@ -1,9 +1,24 @@
 <div class="x_panel">
 	<div class="x_content">
 		<div class="" role="tabpanel" data-example-id="togglable-tabs">
-			<p>This is the account_info view.</p>
 			<br/>
-			{{account}}
+			<div class='row'>
+				<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 '>
+					<div class="">Name : {{account.Name}}</div>
+					<div class="">Industry : {{account.Industry}}</div>
+					<div class="">Type : {{account.Type}}</div>
+					<div class="">Billing Address : {{account.BillingStreet}}, {{account.BillingPostalCode}} {{account.BillingCity}}, {{account.BillingCountry}}</div>
+					<div class="">URL : {{account.attributes.url}}</div>
+					<div class="">Phone : {{account.Phone}}</div>
+					<div class="">Fax : {{account.Fax}}</div>
+					<div class="">Website : <a href="{{account.Website}}" target="_blank">{{account.Website}}</a></div>
+					<div class="">Annual Revenue : {{account.AnnualRevenue}}</div>
+					<div class="">Number Of Employees : {{account.NumberOfEmployees}}</div>
+					<div class="">Description : {{account.Description}}</div>
+					<div class="">Created Date : {{account.CreatedDate}}</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </div>

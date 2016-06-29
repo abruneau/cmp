@@ -51,6 +51,11 @@ angular
 				controller: 'AccountFormCtrl',
 				controllerAs: 'accountForm'
 			})
+.when('/todo', {
+  templateUrl: 'views/todo.html',
+  controller: 'TodoCtrl',
+  controllerAs: 'todo'
+})
 			.otherwise({
 				redirectTo: '/'
 			});

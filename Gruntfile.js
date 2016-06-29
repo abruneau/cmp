@@ -444,6 +444,12 @@ module.exports = function (grunt) {
 								"epiceditor/themes/editor/*",
 								"epiceditor/themes/preview/*"
 							]
+						},
+						'angular-bootstrap-datetimepicker': {
+							files: [
+								"src/css/datetimepicker.css",
+								"src/js/datetimepicker.templates.js"
+							]
 						}
 					}
 				}

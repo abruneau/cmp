@@ -17,7 +17,8 @@ angular
 		'ngSanitize',
 		'ngTouch',
 		'ui.bootstrap',
-		'angular.filter'
+		'angular.filter',
+		'ui.bootstrap.datetimepicker'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
@@ -51,11 +52,11 @@ angular
 				controller: 'AccountFormCtrl',
 				controllerAs: 'accountForm'
 			})
-.when('/todo', {
-  templateUrl: 'views/todo.html',
-  controller: 'TodoCtrl',
-  controllerAs: 'todo'
-})
+			.when('/todo', {
+				templateUrl: 'views/todo.html',
+				controller: 'TodoCtrl',
+				controllerAs: 'todo'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

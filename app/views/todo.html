@@ -1,1 +1,84 @@
-<p>This is the todo view.</p>
+<div class="">
+	<div class="page-title">
+		<div class="title_left">
+			<h3>Todo</h3>
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_content">
+					<section id="todoapp">
+						<header id="header">
+							<form id="todo-form" ng-keyup="$event.keyCode == 13 && addTodo()" ng-submit="addTodo()">
+								<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo.task" ng-disabled="saving" autofocus>
+								<div id="new-todo-date" class="dropdown pull-right">
+									<a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#">
+										<div class="input-group">
+											<input type="text" class="form-control" data-ng-model="newTodo.dueDate" placeholder="Due Date?">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</span>
+										</div>
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<datetimepicker data-ng-model="newTodo.dueDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }" data-on-set-time="addTodo()"/>
+									</ul>
+								</div>
+							</form>
+						</header>
+						<section id="main" ng-show="todos.length" ng-cloak>
+							<input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+							<label for="toggle-all">Mark all as complete</label>
+							<ul id="todo-list">
+								<li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+									<div class="todo-view">
+										<input class="todo-toggle" type="checkbox" ng-model="todo.completed" ng-change="toggleCompleted(todo)">
+										<label ng-dblclick="editTodo(todo)">{{todo.task}} <small><i>{{formatDate(todo.dueDate)}}</i></small></label>
+										<button class="todo-destroy" ng-click="removeTodo(todo)"></button>
+									</div>
+									<form ng-submit="saveEdits(todo, 'submit')">
+										<input class="edit" ng-trim="false" ng-model="todo.task" todo-escape="revertEdits(todo)" ng-blur="saveEdits(todo, 'blur')" todo-focus="todo == editedTodo">
+									</form>
+								</li>
+							</ul>
+						</section>
+						<footer id="footer" ng-show="todos.length" ng-cloak>
+							<span id="todo-count">
+								<strong>{{remainingCount}}</strong>
+								<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+							</span>
+							<ul id="filters">
+								<li>
+									<a ng-click="changeStatus('')" ng-class="{selected: status == ''} ">All</a>
+								</li>
+								<li>
+									<a ng-click="changeStatus('active')" ng-class="{selected: status == 'active'}">Active</a>
+								</li>
+								<li>
+									<a ng-click="changeStatus('completed')" ng-class="{selected: status == 'completed'}">Completed</a>
+								</li>
+							</ul>
+							<button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">Clear completed</button>
+						</footer>
+					</section>
+					<footer id="info">
+						<p>Double-click to edit a todo</p>
+					</footer>
+					<script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
+					<script type="text/javascript">
+						// $(function() {
+						// 	$('#new-todo-date').datetimepicker();
+						// 	$('#new-todo-date').data("DateTimePicker").change(function(e) {
+						// 		console.log(e);
+						// 	})
+						// });
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

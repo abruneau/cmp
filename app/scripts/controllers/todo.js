@@ -148,6 +148,12 @@ angular.module('cmpApp').controller('TodoCtrl', function ($scope, $filter, $rout
 		});
 	};
 
+	$scope.isLate = function (todo) {
+		if (moment(todo.dueDate).isBefore(moment(), 'day') && !todo.completed) {
+			return {'background-color':'#f2dede'};
+		}
+	};
+
 	$scope.formatDate = function (date) {
 		date = moment(date);
 		return date.calendar();

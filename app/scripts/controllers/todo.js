@@ -49,6 +49,10 @@ angular.module('cmpApp').controller('TodoCtrl', function ($scope, $filter, $rout
 			return;
 		}
 
+		if (!$scope.newTodo.dueDate) {
+			$scope.newTodo.dueDate = moment().format();
+		}
+
 		var newTodo = {
 			attributes: {
 				type: 'Todo'

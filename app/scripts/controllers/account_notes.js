@@ -103,6 +103,10 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Acco
 
 	};
 
+	$scope.open = function (note) {
+		evernote.openNote(note);
+	};
+
 	//evernote.getNoteList($scope.account.Name);
 	evernote.registerObserverCallback(updateEvernote);
 	Accounts.registerObserverCallback(updateAccounts);

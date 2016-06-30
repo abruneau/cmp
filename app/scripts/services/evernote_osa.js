@@ -11,7 +11,7 @@ angular.module('cmpApp').factory('evernoteOsa', function () {
 	var self = this;
 
 	//////////////
- 	// Notebook //
+	// Notebook //
 	//////////////
 
 	/**
@@ -152,6 +152,25 @@ angular.module('cmpApp').factory('evernoteOsa', function () {
 		return cmd;
 	};
 
+	var openNote = function (note) {
+		var cmd = "";
+
+		cmd += 'tell application "Evernote"\n';
+		if (note.noteLink) {
+			cmd += "\tset note1 to find note \"" + note.noteLink.replace(/\"/g, "\\\"") + "\"\n";
+		} else {
+			var queryString = makeQueryString(note);
+			cmd += "\tset matches to find notes \"" + queryString.replace(/\\/g, "\\\\").replace(/\"/g, "\\\"") + "\"\n";
+			cmd += "\tset note1 to item 1 of matches\n";
+		}
+		cmd += '\topen note window with note1\n';
+		cmd += 'end tell';
+
+		console.log(cmd);
+
+		return cmd;
+	};
+
 	self.notebookExists = notebookExists;
 	self.createNotebook = createNotebook;
 	self.getNoteList = getNoteList;
@@ -160,6 +179,7 @@ angular.module('cmpApp').factory('evernoteOsa', function () {
 	self.updateHtml = updateHtml;
 	self.createNote = createNote;
 	self.deleteNote = deleteNote;
+	self.openNote = openNote;
 
 	return self;
 });

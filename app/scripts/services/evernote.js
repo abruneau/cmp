@@ -146,6 +146,20 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 		});
 	};
 
+
+	var openNote = function (note) {
+		osascript(evernoteOsa.openNote(note), {
+			flags: ['-s', 's'],
+			type: 'AppleScript'
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+	};
+
+
+
 	var Html2md = function (html) {
 
 		var cheerio = require('cheerio'),
@@ -201,6 +215,7 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 	self.Html2md = Html2md;
 	self.createNote = createNote;
 	self.deleteNote = deleteNote;
+	self.openNote = openNote;
 
 	return self;
 });

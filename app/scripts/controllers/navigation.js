@@ -30,7 +30,7 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 	var updateAccounts = function () {
 		$scope.$apply(function () {
 			$scope.accountList = Accounts.list;
-			//mergeData();
+			mergeData();
 		});
 	};
 

@@ -10,10 +10,24 @@
 angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $routeParams, localAccount, Fs) {
 
 	var accountId = $routeParams.id;
+	var currentPath = '';
 
 	function updateList(path) {
 		if (path) {
-			$scope.fileList = Fs.ls(path);
+			var list = [];
+
+			// Add Go back link
+			if (path !== localAccount.selected.path) {
+				list.push({
+					name: '..',
+					directory: true,
+					path: Fs.fileParent(path)
+				});
+			}
+
+			$scope.fileList = list.concat(Fs.ls(path));
+			$scope.breadcrum = Fs.breadcrum(path, localAccount.selected.path);
+			currentPath = path;
 		}
 	}
 
@@ -27,6 +41,7 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 	};
 
 	$scope.fileList = null;
+	$scope.breadcrum = [];
 
 	$scope.fileIcon = function (file) {
 
@@ -56,19 +71,7 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 
 	$scope.openFile = function (file) {
 		if (file.directory) {
-			var list = [];
-
-			// Add Go back link
-			if (file.path !== localAccount.selected.path) {
-				list.push({
-					name: '..',
-					directory: true,
-					path: Fs.fileParent(file.path)
-				});
-			}
-
-			// list.push(Fs.ls(file.path));
-			$scope.fileList = list.concat(Fs.ls(file.path));
+			updateList(file.path);
 
 		} else {
 			Fs.open(file.path);
@@ -77,6 +80,15 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 
 	$scope.openApplication = function (file) {
 		Fs.open(file.path);
+	};
+
+	$scope.mkdir = function (name) {
+		Fs.mkdir(name, currentPath);
+		updateList(currentPath);
+	};
+
+	$scope.cd = function (path) {
+		updateList(path)
 	};
 
 	localAccount.get(accountId);

@@ -85,5 +85,35 @@ angular.module('cmpApp').factory('Fs', function () {
 		fs.mkdirSync(path + "/" + name);
 	};
 
+	self.breadcrum = function (path, root) {
+		var out = [];
+		if (path.indexOf(root) === 0) {
+
+			out.push({
+				index: 0,
+				path: root,
+				name: root
+			});
+
+			var p = root;
+			var o = path.replace(root, '');
+			var list = o.split("/");
+
+			for (var i in list) {
+				if (i > 0) {
+					p = p + "/" + list[i];
+					out.push({
+						index: i,
+						name: list[i],
+						path: p
+					});
+				}
+
+			}
+		}
+
+		return out;
+	};
+
 	return self;
 });

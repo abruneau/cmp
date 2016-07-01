@@ -17,7 +17,7 @@
 					</li>
 				</ul>
 			</li>
-			<li>
+			<!-- <li>
 				<a>
 					<i class="fa fa-briefcase"></i>
 					Accounts
@@ -29,6 +29,26 @@
 					</li>
 					<li ng-repeat="account in accountList | orderBy:'-Name' : true">
 						<a href="#/account/{{account.Id}}">{{account.Name}}</a>
+					</li>
+				</ul>
+			</li> -->
+			<li>
+				<a>
+					<i class="fa fa-briefcase"></i>
+					Accounts
+					<span class="fa fa-chevron-down"></span>
+				</a>
+				<ul class="nav child_menu">
+					<li>
+						<a href="#/account_form"><i class="fa fa-plus-circle"></i>Add Account</a>
+					</li>
+					<li ng-repeat="(key, value) in list | orderBy:'-group' : true | groupBy: 'group' ">
+						<a ng-click="slide($event)">{{key}}<span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li ng-repeat="account in value | orderBy:'-Name' : true">
+								<a href="#/account/{{account.Id}}">{{account.Name}}</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</li>

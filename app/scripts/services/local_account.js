@@ -2,18 +2,17 @@
 
 /**
  * @ngdoc service
- * @name cmpApp.Accounts
+ * @name cmpApp.localAccount
  * @description
- * # Accounts
- * Service in the cmpApp.
+ * # localAccount
+ * Factory in the cmpApp.
  */
-angular.module('cmpApp').factory('Accounts', function (database) {
+angular.module('cmpApp').factory('localAccount', function (database) {
 	var self = this;
 
-	var accountList = [];
-	var opportunities = [];
 	var observerCallbacks = [];
 	var selectedAccount = null;
+	var accountList = [];
 
 	//call this when you know 'foo' has been changed
 	var notifyObservers = function () {
@@ -24,10 +23,10 @@ angular.module('cmpApp').factory('Accounts', function (database) {
 
 	var updateList = function () {
 		database.find({
-			"attributes.type": 'Account'
+			"attributes.type": 'LocalInfo'
 		}, {
-			Name: 1,
-			Id: 1,
+			group: 1,
+			accountId: 1,
 			_id: 0
 		}, function (err, docs) {
 			if (err) {
@@ -40,27 +39,12 @@ angular.module('cmpApp').factory('Accounts', function (database) {
 		});
 	};
 
-	var getOpportunities = function (id) {
-		database.find({
-			AccountId: id
-		}, function (err, docs) {
-			if (docs) {
-				self.opportunities = docs;
-				notifyObservers();
-			}
-			if (err) {
-				console.log(err);
-			}
-		});
-	};
-
-	var get = function (id) {
+	var get = function (accountId) {
 		database.findOne({
-			Id: id
+			accountId: accountId
 		}, function (err, doc) {
 			if (doc) {
 				self.selected = doc;
-				getOpportunities(id);
 				notifyObservers();
 			}
 			if (err) {
@@ -69,17 +53,42 @@ angular.module('cmpApp').factory('Accounts', function (database) {
 		});
 	};
 
+	var insert = function (info) {
+		database.insert(info, function (err, newDoc) {
+			if (!err && newDoc) {
+				self.selected = newDoc;
+				updateList();
+				notifyObservers();
+			} else {
+				console.log(err);
+			}
+		});
+	};
+
+	var update = function (info) {
+		database.update({
+			_id: info._id
+		}, info, {}, function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				updateList();
+			}
+		});
+	};
 
 	//register an observer
 	self.registerObserverCallback = function (callback) {
 		observerCallbacks.push(callback);
 	};
-	self.list = accountList;
-	self.opportunities = opportunities;
-	self.updateList = updateList;
+
 	self.selected = selectedAccount;
+	self.list = accountList;
+
+	self.updateList = updateList;
 	self.get = get;
-	self.getOpportunities = getOpportunities;
+	self.insert = insert;
+	self.update = update;
 
 	return self;
 });

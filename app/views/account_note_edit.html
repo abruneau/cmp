@@ -6,8 +6,11 @@
 	var MarkdownIt = require('markdown-it')()
 		.use(require('markdown-it-checkbox'))
 		.use(require('markdown-it-emoji'))
-		.use(require('markdown-it-contents'));
+		.use(require('markdown-it-contents'), {className: 'table-of-contents'});
 
+	var markdown = function (md) {
+		return MarkdownIt.render(md);
+	};
 
 	var opts = {
 		container: 'epiceditor',
@@ -16,7 +19,7 @@
 		clientSideStorage: false,
 		localStorageName: 'epiceditor',
 		useNativeFullscreen: true,
-		parser: MarkdownIt,
+		parser: markdown,
 		file: {
 			name: 'epiceditor',
 			defaultContent: '',

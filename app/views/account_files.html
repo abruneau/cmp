@@ -4,7 +4,7 @@
 		<ul class="nav navbar-right panel_toolbox"></ul>
 		<div class="clearfix"></div>
 	</div>
-	<div class="x_content">
+	<div class="x_content" ng-if="localInfo.path">
 		<ol class="breadcrumb">
 			<li ng-repeat="b in breadcrum | orderBy: 'index'">
 				<a ng-click="cd(b.path)">{{b.name}}</a>

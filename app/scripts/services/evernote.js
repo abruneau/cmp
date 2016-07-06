@@ -14,7 +14,7 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 
 	var observerCallbacks = [];
 	var osascript = require('osascript').eval;
-	var notebookExists = false;
+	var notebookExists = null;
 	var noteList = [];
 	var noteInfo = null;
 	var html = null;
@@ -111,6 +111,16 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 		});
 	};
 
+	var getHtmlSync = function (note) {
+		var deasync = require('deasync');
+		var osa = deasync(osascript);
+		try {
+			return osa(evernoteOsa.getHtml(note), {flags: ['-s', 's']});
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
 	var updateHtml = function (note, newHtml) {
 		osascript(evernoteOsa.updateHtml(note, newHtml), {
 			flags: ['-s', 's']
@@ -123,6 +133,18 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 
 	var createNote = function (title, notebook) {
 		osascript(evernoteOsa.createNote(title, notebook), {
+			flags: ['-s', 's']
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				getNoteList(notebook);
+			}
+		});
+	};
+
+	var createNoteWithHtml = function (title, notebook, html) {
+		osascript(evernoteOsa.createNote(title, notebook, html), {
 			flags: ['-s', 's']
 		}, function (err) {
 			if (err) {
@@ -211,9 +233,11 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 	self.getNoteList = getNoteList;
 	self.getNoteInfo = getNoteInfo;
 	self.getHtml = getHtml;
+	self.getHtmlSync = getHtmlSync;
 	self.updateHtml = updateHtml;
 	self.Html2md = Html2md;
 	self.createNote = createNote;
+	self.createNoteWithHtml = createNoteWithHtml;
 	self.deleteNote = deleteNote;
 	self.openNote = openNote;
 

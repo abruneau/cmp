@@ -7,13 +7,19 @@
  * # ProfileCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('ProfileCtrl', function (salesForce, $scope) {
+angular.module('cmpApp').controller('ProfileCtrl', function (salesForce, Settings, $scope) {
 
 	var updateSf = function () {
 		$scope.$apply(function () {
 			$scope.sf = salesForce.settings;
 			$scope.identity = salesForce.identity;
 			$scope.connected = salesForce.connected;
+		});
+	};
+
+	var updateSettings = function () {
+		$scope.$apply(function () {
+			$scope.settings = Settings.settings;
 		});
 	};
 
@@ -35,6 +41,13 @@ angular.module('cmpApp').controller('ProfileCtrl', function (salesForce, $scope)
 		salesForce.getDesc();
 	};
 
+	$scope.saveSettings = function (set) {
+		Settings.update(set);
+	};
+
 	salesForce.registerObserverCallback(updateSf);
+	Settings.registerObserverCallback(updateSettings);
+
+	Settings.get();
 
 });

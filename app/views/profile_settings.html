@@ -1,0 +1,28 @@
+<form name="form" role="form" ng-submit="saveSettings(settings)" novalidate>
+
+	<div class="form-group">
+		<label for="loginUrl" class="control-label">Save notes</label>
+		<div class="radio">
+			<label>
+				<input type="radio" name="optionsRadios" ng-model="settings.noteSaveMode" id="optionsRadios1" value="l" checked>
+				Localy
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<input type="radio" name="optionsRadios" ng-model="settings.noteSaveMode" id="optionsRadios2" value="e">
+				In Evernote
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<input type="radio" name="optionsRadios" ng-model="settings.noteSaveMode" id="optionsRadios3" value="le">
+				Localy and in Evernote
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Update</button>
+	</div>
+</form>
+{{settings}}

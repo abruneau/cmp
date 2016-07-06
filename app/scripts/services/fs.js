@@ -85,6 +85,31 @@ angular.module('cmpApp').factory('Fs', function () {
 		fs.mkdirSync(path + "/" + name);
 	};
 
+	self.exists = function (path) {
+		try {
+			fs.accessSync(path);
+			return true;
+		} catch (e) {
+			return false;
+		}
+	};
+
+	self.creationDate = function (path) {
+		return fs.statSync(path).birthtime;
+	};
+
+	self.read = function (path) {
+		return fs.readFileSync(path, 'utf8');
+	};
+
+	self.write = function (path, data) {
+		return fs.writeFileSync(path, data);
+	};
+
+	self.rm = function (path) {
+		return fs.unlinkSync(path);
+	};
+
 	self.breadcrum = function (path, root) {
 		var out = [];
 		if (path.indexOf(root) === 0) {

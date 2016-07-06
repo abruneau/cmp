@@ -7,46 +7,94 @@
  * # AccountNotesCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Accounts, $scope, $sce, $window) {
+angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Notes, localAccount, Settings, Accounts, $scope, $sce, $window, $routeParams) {
 
 	/*global moment */
 	/*global $ */
 
+	var accountId = $routeParams.id;
+
 	var MarkdownIt = require('markdown-it')()
 		.use(require('markdown-it-checkbox'))
 		.use(require('markdown-it-emoji'))
-		.use(require('markdown-it-contents'), {className: 'table-of-contents'});
+		.use(require('markdown-it-contents'), {
+			className: 'table-of-contents'
+		});
+
+	var localSave = false;
+	var evernoteSave = false;
+	var notebook = null;
+	var evernoteList = [];
+
+	function testSync() {
+		if (evernoteSave && localSave) {
+			$scope.syncOption = true;
+		}
+	}
 
 	var updateEvernote = function () {
 		$scope.$apply(function () {
 			$scope.notebookExists = evernote.notebookExists;
-			$scope.noteList = evernote.noteList;
-			// $scope.note = evernote.noteInfo;
-			$scope.html = $sce.trustAsHtml(evernote.html);
-			if ($scope.html) {
-				$scope.md = evernote.Html2md($scope.html.toString());
+			if ($scope.notebookExists === false) {
+				evernote.createNotebook(notebook);
+			}
+			if (evernoteSave && !localSave) {
+				$scope.noteList = evernote.noteList;
+				$scope.html = $sce.trustAsHtml(evernote.html);
+				if ($scope.html) {
+					$scope.md = evernote.Html2md($scope.html.toString());
+				}
+			} else {
+				evernoteList = evernote.noteList;
+				testSync();
 			}
 		});
 	};
 
-	var updateAccounts = function () {
+	function init() {
+		if ($scope.settings && $scope.localInfo) {
+			notebook = Accounts.selected.Name;
+			if ($scope.settings.noteSaveMode.indexOf('e') > -1) {
+				evernoteSave = true;
+				evernote.registerObserverCallback(updateEvernote);
+				evernote.checkNotebookExists(notebook);
+				evernote.getNoteList(notebook);
+			}
+			if ($scope.settings.noteSaveMode.indexOf('l') > -1) {
+				localSave = true;
+				var path = $scope.localInfo.path;
+				if (path) {
+					if (!Notes.folderExist(path)) {
+						Notes.createFolder(path);
+					}
+					$scope.noteList = Notes.getNoteList(path, notebook);
+				} else {
+					console.log("Path not set");
+				}
+			}
+		}
+	}
+
+	var updateSettings = function () {
 		$scope.$apply(function () {
-			$scope.account = Accounts.selected;
-			if ($scope.account) {
-				evernote.checkNotebookExists($scope.account.Name);
-				evernote.getNoteList($scope.account.Name);
-			}
+			$scope.settings = Settings.settings;
+			init();
 		});
 	};
 
-	$scope.notebookExists = evernote.notebookExists;
+	var updateLocalInfo = function () {
+		$scope.$apply(function () {
+			$scope.localInfo = localAccount.selected;
+			init();
+		});
+	};
+
+	$scope.notebookExists = true;
 	$scope.editMode = false;
-	$scope.noteList = evernote.noteList;
 	$scope.note = null;
-	$scope.account = Accounts.selected;
-	$scope.html = $sce.trustAsHtml(evernote.html);
 	$scope.newNoteTitle = '';
 	$scope.md = '';
+	$scope.syncOption = false;
 
 	$scope.formatDate = function (date) {
 		return moment(date).calendar();
@@ -55,16 +103,30 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Acco
 	$scope.loadNote = function (note) {
 		$scope.note = note;
 		$scope.editMode = false;
-		evernote.getHtml(note);
-		//evernote.getNoteInfo(note);
+		if (localSave) {
+			$scope.md = Notes.getMd(note.path);
+			$scope.html = $sce.trustAsHtml(MarkdownIt.render($scope.md));
+		}
+		if (evernoteSave && !localSave) {
+			evernote.getHtml(note);
+			evernote.getNoteInfo(note);
+		}
 	};
 
 	$scope.createNotebook = function () {
-		evernote.createNotebook($scope.account.Name);
+		evernote.createNotebook(notebook);
 	};
 
 	$scope.createNote = function () {
-		evernote.createNote($scope.newNoteTitle, $scope.account.Name);
+		//evernote.createNote($scope.newNoteTitle, $scope.account.Name);
+		var title = $scope.newNoteTitle.replace(/\\/g, '.');
+		if (localSave) {
+			Notes.createNote(title, $scope.localInfo.path);
+			$scope.noteList = Notes.getNoteList($scope.localInfo.path);
+		}
+		if (evernoteSave) {
+			evernote.createNote(title, notebook);
+		}
 		$scope.newNoteTitle = '';
 	};
 
@@ -74,7 +136,13 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Acco
 			if (r) {
 				$scope.note = null;
 				$scope.html = '';
-				evernote.deleteNote(note);
+				if (localSave) {
+					Notes.deleteNote(note.path);
+					$scope.noteList = Notes.getNoteList($scope.localInfo.path);
+				}
+				if (evernoteSave) {
+					evernote.deleteNote(note);
+				}
 			}
 		}
 	};
@@ -88,27 +156,60 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Acco
 		$scope.editMode = !$scope.editMode;
 	};
 
-	$scope.updateHtml = function () {
-		console.log($("#my-edit-area").val());
-	};
-
 	$scope.save = function (note) {
 		if ($scope.editMode) {
 			$scope.md = $("#my-edit-area").val();
 			var newHtml = MarkdownIt.render($scope.md.toString());
 			$scope.html = $sce.trustAsHtml(newHtml);
 		}
-
-		evernote.updateHtml(note, $scope.html);
-
+		if (localSave) {
+			Notes.updateMd(note.path, $scope.md);
+		}
+		if (evernoteSave) {
+			evernote.updateHtml(note, $scope.html);
+		}
 	};
 
 	$scope.open = function (note) {
-		evernote.openNote(note);
+		if (evernoteSave) {
+			evernote.openNote(note);
+		}
 	};
 
-	//evernote.getNoteList($scope.account.Name);
-	evernote.registerObserverCallback(updateEvernote);
-	Accounts.registerObserverCallback(updateAccounts);
+	$scope.syncNotes = function () {
+
+		for (var i in evernoteList) {
+			var match = $.grep($scope.noteList, function (e) {
+				return e.title == evernoteList[i].title;
+			});
+			if (match.length === 0) {
+				var html = evernote.getHtmlSync(evernoteList[i]);
+				var md = evernote.Html2md(html.toString());
+				var path = $scope.localInfo.path + '/notes/' + evernoteList[i].title.replace(/\//g, '.') + '.md';
+				Notes.updateMd(path, md);
+			}
+		}
+
+		var noteList = $scope.noteList;
+
+		for (var j in noteList) {
+			var match2 = $.grep(evernoteList, function (e) {
+				return e.title == noteList[i].title;
+			});
+			if (match2.length === 0) {
+				var md2 = Notes.getMd(noteList[j].path);
+				var html2 = MarkdownIt.render(md2);
+				var title = noteList[j].title;
+				evernote.createNoteWithHtml(title, notebook, html2);
+			}
+		}
+		$scope.noteList = Notes.getNoteList($scope.localInfo.path);
+	};
+
+	Settings.registerObserverCallback(updateSettings);
+	localAccount.registerObserverCallback(updateLocalInfo);
+
+	Settings.get();
+	localAccount.get(accountId);
 
 });

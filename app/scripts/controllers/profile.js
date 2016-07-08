@@ -33,7 +33,6 @@ angular.module('cmpApp').controller('ProfileCtrl', function (salesForce, Setting
 	};
 
 	$scope.updateIdentity = function () {
-		console.log("Update identity");
 		salesForce.updateIndentity();
 	};
 

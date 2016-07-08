@@ -180,7 +180,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 
 		for (var i in evernoteList) {
 			var match = $.grep($scope.noteList, function (e) {
-				return e.title == evernoteList[i].title;
+				return e.title === evernoteList[i].title;
 			});
 			if (match.length === 0) {
 				var html = evernote.getHtmlSync(evernoteList[i]);

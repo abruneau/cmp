@@ -88,7 +88,7 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 	};
 
 	$scope.cd = function (path) {
-		updateList(path)
+		updateList(path);
 	};
 
 	localAccount.get(accountId);

@@ -399,6 +399,19 @@ module.exports = function (grunt) {
 					cwd: 'bower_components/bootstrap/dist',
 					src: 'fonts/*',
 					dest: '<%= yeoman.dist %>'
+				}, {
+					expand: true,
+					cwd: 'bower_components/jquery/dist/',
+					src: 'jquery.js',
+					dest: '<%= yeoman.dist %>/bower_components/jquery/dist/'
+				}, {
+					expand: true,
+					cwd: '<%= yeoman.app %>',
+					dest: '<%= yeoman.dist %>',
+					src: [
+						'index.js',
+						'package.json'
+					]
 				}]
 			},
 			styles: {
@@ -440,15 +453,15 @@ module.exports = function (grunt) {
 					packageSpecific: {
 						'EpicEditor': {
 							files: [
-								"epiceditor/themes/base/*",
-								"epiceditor/themes/editor/*",
-								"epiceditor/themes/preview/*"
+								'epiceditor/themes/base/*',
+								'epiceditor/themes/editor/*',
+								'epiceditor/themes/preview/*'
 							]
 						},
 						'angular-bootstrap-datetimepicker': {
 							files: [
-								"src/css/datetimepicker.css",
-								"src/js/datetimepicker.templates.js"
+								'src/css/datetimepicker.css',
+								'src/js/datetimepicker.templates.js'
 							]
 						}
 					}
@@ -461,7 +474,7 @@ module.exports = function (grunt) {
 				stderr: false
 			},
 			target: {
-				command: 'electron app'
+				command: 'electron .'
 			}
 		}
 	});

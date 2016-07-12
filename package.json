@@ -1,6 +1,6 @@
 {
   "name": "cmp",
-  "main": "dist/index.js",
+  "main": "index.js",
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",

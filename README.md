@@ -5,7 +5,9 @@ version 0.15.1.
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Run `grunt start` for preview
+
+Run `electron-packager . cmp --platform="darwin" --arch="all" --ignore="test|.tmp" --overwrite` for building app
 
 ## Testing
 

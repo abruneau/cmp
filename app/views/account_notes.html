@@ -6,7 +6,7 @@
 					COMPOSE
 				</button>
 				<!-- <button id="compose" class="btn btn-sm btn-success btn-block" type="button">COMPOSE</button> -->
-				<div ng-repeat="note in noteList track by $index">
+				<div ng-repeat="note in noteList | orderBy: 'creationDate': true track by $index">
 					<a ng-click="loadNote(note)">
 						<div class="mail_list">
 							<div class="left"></div>

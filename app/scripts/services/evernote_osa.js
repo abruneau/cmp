@@ -123,7 +123,7 @@ angular.module('cmpApp').factory('evernoteOsa', function () {
 
 		cmd += "(function(){Evernote = Application('Evernote');\n";
 		cmd += findNote(note);
-		cmd += "var html = \'" + newHtml.toString().replace(/\r?\n|\r/g, '') + "\';\n";
+		cmd += "var html = \"" + newHtml.toString().replace(/\r?\n|\r/g, '').replace(/\"/g, '&quot;') + "\";\n";
 		cmd += "matche.htmlContent = html;\n";
 		cmd += "})()";
 		return cmd;

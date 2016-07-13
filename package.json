@@ -76,6 +76,7 @@
     "markdown-it-checkbox": "^1.1.0",
     "markdown-it-contents": "0.0.1",
     "markdown-it-emoji": "^1.2.0",
+    "markdown-it-highlightjs": "^2.0.0",
     "nedb": "^1.8.0",
     "osascript": "^1.2.0"
   }

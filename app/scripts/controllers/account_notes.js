@@ -17,6 +17,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	var MarkdownIt = require('markdown-it')()
 		.use(require('markdown-it-checkbox'))
 		.use(require('markdown-it-emoji'))
+		.use(require('markdown-it-highlightjs'))
 		.use(require('markdown-it-contents'), {
 			className: 'table-of-contents'
 		});

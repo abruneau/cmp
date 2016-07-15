@@ -34,22 +34,19 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	}
 
 	var updateEvernote = function () {
-		$scope.$apply(function () {
-			$scope.notebookExists = evernote.notebookExists;
-			if ($scope.notebookExists === false) {
-				evernote.createNotebook(notebook);
+		if ($scope.notebookExists === false) {
+			evernote.createNotebook(notebook);
+		}
+		if (evernoteSave && !localSave) {
+			$scope.noteList = evernote.noteList;
+			$scope.html = $sce.trustAsHtml(evernote.html);
+			if ($scope.html) {
+				$scope.md = evernote.Html2md($scope.html.toString());
 			}
-			if (evernoteSave && !localSave) {
-				$scope.noteList = evernote.noteList;
-				$scope.html = $sce.trustAsHtml(evernote.html);
-				if ($scope.html) {
-					$scope.md = evernote.Html2md($scope.html.toString());
-				}
-			} else {
-				evernoteList = evernote.noteList;
-				testSync();
-			}
-		});
+		} else {
+			evernoteList = evernote.noteList;
+			testSync();
+		}
 	};
 
 	function init() {
@@ -58,7 +55,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 			if ($scope.settings.noteSaveMode.indexOf('e') > -1) {
 				evernoteSave = true;
 				evernote.registerObserverCallback(updateEvernote);
-				evernote.checkNotebookExists(notebook);
+				$scope.notebookExists = evernote.notebookExists(notebook);
 				evernote.getNoteList(notebook);
 			}
 			if ($scope.settings.noteSaveMode.indexOf('l') > -1) {
@@ -84,10 +81,8 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	};
 
 	var updateLocalInfo = function () {
-		$scope.$apply(function () {
-			$scope.localInfo = localAccount.selected;
-			init();
-		});
+		$scope.localInfo = localAccount.selected;
+		init();
 	};
 
 	$scope.notebookExists = true;
@@ -119,7 +114,6 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	};
 
 	$scope.createNote = function () {
-		//evernote.createNote($scope.newNoteTitle, $scope.account.Name);
 		var title = $scope.newNoteTitle.replace(/\\/g, '.');
 		if (localSave) {
 			Notes.createNote(title, $scope.localInfo.path);

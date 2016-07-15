@@ -15,30 +15,22 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 	function mergeData() {
 		if ($scope.accountList && $scope.localInfoList) {
 			var res = alasql("SELECT sf.*, lo.`group` FROM ? AS sf LEFT JOIN ? AS lo ON sf.Id = lo.accountId", [$scope.accountList, $scope.localInfoList]);
-			//$scope.$apply(function () {
 			$scope.list = res;
-			//});
 		}
 	}
 
 	var updateSf = function () {
-		$scope.$apply(function () {
-			$scope.identity = salesForce.identity;
-		});
+		$scope.identity = salesForce.identity;
 	};
 
 	var updateAccounts = function () {
-		$scope.$apply(function () {
-			$scope.accountList = Accounts.list;
-			mergeData();
-		});
+		$scope.accountList = Accounts.list;
+		mergeData();
 	};
 
 	var updateLocalInfo = function () {
-		$scope.$apply(function () {
-			$scope.localInfoList = localAccount.list;
-			mergeData();
-		});
+		$scope.localInfoList = localAccount.list;
+		mergeData();
 	};
 
 	var setContentHeight = function () {

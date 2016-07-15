@@ -14,7 +14,6 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 
 	var observerCallbacks = [];
 	var osascript = require('osascript').eval;
-	var notebookExists = null;
 	var noteList = [];
 	var noteInfo = null;
 	var html = null;
@@ -35,19 +34,17 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 	// Notebook //
 	//////////////
 
-	var checkNotebookExists = function (name) {
-		osascript(evernoteOsa.notebookExists(name), {
-			flags: ['-s', 's'],
-			type: 'AppleScript'
-		}, function (err, result) {
-			if (err) {
-				console.log(err);
-			}
-			if (result) {
-				self.notebookExists = JSON.parse(result);
-				notifyObservers();
-			}
-		});
+	var notebookExists = function (name) {
+		var deasync = require('deasync');
+		var osa = deasync(osascript);
+		try {
+			return JSON.parse(osa(evernoteOsa.notebookExists(name), {
+				flags: ['-s', 's'],
+				type: 'AppleScript'
+			}));
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	var createNotebook = function (name) {
@@ -56,8 +53,6 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 		}, function (err) {
 			if (err) {
 				console.log(err);
-			} else {
-				checkNotebookExists(name);
 			}
 		});
 	};
@@ -115,7 +110,9 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 		var deasync = require('deasync');
 		var osa = deasync(osascript);
 		try {
-			return osa(evernoteOsa.getHtml(note), {flags: ['-s', 's']});
+			return osa(evernoteOsa.getHtml(note), {
+				flags: ['-s', 's']
+			});
 		} catch (e) {
 			console.log(e);
 		}
@@ -168,7 +165,6 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 		});
 	};
 
-
 	var openNote = function (note) {
 		osascript(evernoteOsa.openNote(note), {
 			flags: ['-s', 's'],
@@ -179,8 +175,6 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 			}
 		});
 	};
-
-
 
 	var Html2md = function (html) {
 
@@ -222,13 +216,12 @@ angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) 
 	};
 
 	// Variables
-	self.notebookExists = notebookExists;
 	self.noteList = noteList;
 	self.noteInfo = noteInfo;
 	self.html = html;
 
 	// Functions
-	self.checkNotebookExists = checkNotebookExists;
+	self.notebookExists = notebookExists;
 	self.createNotebook = createNotebook;
 	self.getNoteList = getNoteList;
 	self.getNoteInfo = getNoteInfo;

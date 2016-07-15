@@ -32,12 +32,10 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 	}
 
 	var updateLocalInfo = function () {
-		$scope.$apply(function () {
-			$scope.localInfo = localAccount.selected;
-			if (localAccount.selected) {
-				updateList(localAccount.selected.path);
-			}
-		});
+		$scope.localInfo = localAccount.selected;
+		if (localAccount.selected) {
+			updateList(localAccount.selected.path);
+		}
 	};
 
 	$scope.fileList = null;

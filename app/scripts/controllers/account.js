@@ -14,17 +14,13 @@ angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParam
 	var accountId = $routeParams.id;
 
 	var updateAccounts = function () {
-		$scope.$apply(function () {
-			$scope.accountList = Accounts.list;
-			$scope.account = Accounts.selected;
-			$scope.opportunities = Accounts.opportunities;
-		});
+		$scope.accountList = Accounts.list;
+		$scope.account = Accounts.selected;
+		$scope.opportunities = Accounts.opportunities;
 	};
 
 	var updateLocalInfo = function () {
-		$scope.$apply(function () {
-			$scope.localInfo = localAccount.selected;
-		});
+		$scope.localInfo = localAccount.selected;
 	};
 
 	$scope.localInfo = {

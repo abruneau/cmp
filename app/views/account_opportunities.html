@@ -22,6 +22,7 @@
 				  <th>ForecastCategory</th>
 				  <th>ForecastCategoryName</th>
 				  <th>Fiscal</th>
+				  <th>Team</th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -33,6 +34,11 @@
 				  <td>{{opport.ForecastCategory}}</td>
 				  <td>{{opport.ForecastCategoryName}}</td>
 				  <td>{{opport.Fiscal}}</td>
+				  <td>
+					  <div ng-repeat="member in opport.OpportunityTeamMembers.records">
+					  		{{member.Name}} : {{member.TeamMemberRole}}
+					  </div>
+				  </td>
 				</tr>
 			  </tbody>
 			</table>

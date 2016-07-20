@@ -177,7 +177,7 @@ angular.module('cmpApp').factory('salesForce', function (database, Accounts) {
 	};
 
 	var loadOpportunities = function (id) {
-		connection.query("SELECT " + opportunityFields.toString() + " FROM Opportunity WHERE AccountId = '" + id + "'")
+		connection.query("SELECT " + opportunityFields.toString() + ", (SELECT Name, TeamMemberRole FROM OpportunityTeamMembers) FROM Opportunity WHERE AccountId = '" + id + "'")
 			.then(function (res) {
 				database.remove({
 					AccountId: id

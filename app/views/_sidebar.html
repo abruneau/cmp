@@ -3,7 +3,7 @@
 		<h3>General</h3>
 		<ul class="nav side-menu">
 			<li>
-				<a>
+				<a ng-click="slide($event)">
 					<i class="fa fa-home"></i>
 					Home
 					<span class="fa fa-chevron-down"></span>
@@ -17,23 +17,8 @@
 					</li>
 				</ul>
 			</li>
-			<!-- <li>
-				<a>
-					<i class="fa fa-briefcase"></i>
-					Accounts
-					<span class="fa fa-chevron-down"></span>
-				</a>
-				<ul class="nav child_menu">
-					<li>
-						<a href="#/account_form"><i class="fa fa-plus-circle"></i>Add Account</a>
-					</li>
-					<li ng-repeat="account in accountList | orderBy:'-Name' : true">
-						<a href="#/account/{{account.Id}}">{{account.Name}}</a>
-					</li>
-				</ul>
-			</li> -->
 			<li>
-				<a>
+				<a ng-click="slide($event)">
 					<i class="fa fa-briefcase"></i>
 					Accounts
 					<span class="fa fa-chevron-down"></span>

@@ -71,28 +71,22 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 		}
 	};
 
-	$('#sidebar-menu a').on('click', function () {
-		var $li = $(this).parent();
+	$scope.toggle = function () {
+		var BODY = $('body');
+		var SIDEBAR_MENU = $('#sidebar-menu');
 
-		if ($li.is('.active')) {
-			$li.removeClass('active active-sm');
-			$('ul:first', $li).slideUp(function () {
-				setContentHeight();
-			});
-		} else {
-			// prevent closing menu if we are on child menu
-			if (!$li.parent().is('.child_menu')) {
-				$('#sidebar-menu li').removeClass('active active-sm');
-				$('#sidebar-menu li ul').slideUp();
-			}
+		if (BODY.hasClass('nav-md')) {
+            SIDEBAR_MENU.find('li.active ul').hide();
+            SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+        } else {
+            SIDEBAR_MENU.find('li.active-sm ul').show();
+            SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+        }
 
-			$li.addClass('active');
+        BODY.toggleClass('nav-md nav-sm');
 
-			$('ul:first', $li).slideDown(function () {
-				setContentHeight();
-			});
-		}
-	});
+        setContentHeight();
+	};
 
 	$scope.homeIsCollapsed = false;
 	$scope.identity = salesForce.identity;

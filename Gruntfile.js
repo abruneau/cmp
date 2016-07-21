@@ -534,7 +534,8 @@ module.exports = function (grunt) {
 	]);
 
 	grunt.registerTask('start', [
-		'bower',
+		//'bower',
+		'wiredep',
 		'clean:server',
 		'concurrent:server',
 		'postcss:server',

@@ -1,8 +1,13 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cmpApp.controller:AccountFilesCtrl
+ * @memberof cmpApp
+ * @ngdoc controller
+ * @name AccountFilesCtrl
+ * @param $scope {service} controller scope
+ * @param $routeParams {service} route scope
+ * @param localAccount {service} laocal infos
+ * @param Fs {service} Fs service
  * @description
  * # AccountFilesCtrl
  * Controller of the cmpApp
@@ -12,6 +17,13 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 	var accountId = $routeParams.id;
 	var currentPath = '';
 
+	/**
+	 * Update list of files and folders for a given path
+	 * Equivalent of a ls
+	 * @memberof AccountFilesCtrl
+	 * @function updateList
+	 * @param  {String} path full path of the folders
+	 */
 	function updateList(path) {
 		if (path) {
 			var list = [];
@@ -31,16 +43,29 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 		}
 	}
 
-	var updateLocalInfo = function () {
+	/**
+	 * Update $scope.localInfo on changes
+	 * and triger updateList function
+	 * @memberof AccountFilesCtrl
+	 * @function updateLocalInfo
+	 */
+	function updateLocalInfo() {
 		$scope.localInfo = localAccount.selected;
 		if (localAccount.selected) {
 			updateList(localAccount.selected.path);
 		}
-	};
+	}
 
 	$scope.fileList = null;
 	$scope.breadcrum = [];
 
+	/**
+	 * Return corresponding icon for a file type
+	 * @memberof AccountFilesCtrl
+	 * @function fileIcon
+	 * @param  {String} file file name
+	 * @return {String}      corresponding icon fa class
+	 */
 	$scope.fileIcon = function (file) {
 
 		if (file.directory) {
@@ -67,6 +92,14 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 		}
 	};
 
+	/**
+	 * Triger function updateList if file is a directory
+	 * Open file with default application else
+	 *
+	 * @memberof AccountFilesCtrl
+	 * @function openFile
+	 * @param  {Object} file the file object
+	 */
 	$scope.openFile = function (file) {
 		if (file.directory) {
 			updateList(file.path);
@@ -76,15 +109,36 @@ angular.module('cmpApp').controller('AccountFilesCtrl', function ($scope, $route
 		}
 	};
 
+	/**
+	 * Open file or folder with default application
+	 *
+	 * @memberof AccountFilesCtrl
+	 * @function openApplication
+	 * @param  {object} file the file object
+	 */
 	$scope.openApplication = function (file) {
 		Fs.open(file.path);
 	};
 
+	/**
+	 * Create a new directory in the current path
+	 *
+	 * @memberof AccountFilesCtrl
+	 * @function mkdir
+	 * @param  {String} name Name of the new folders
+	 */
 	$scope.mkdir = function (name) {
 		Fs.mkdir(name, currentPath);
 		updateList(currentPath);
 	};
 
+	/**
+	 * Change the current directory
+	 *
+	 * @memberof AccountFilesCtrl
+	 * @function cd
+	 * @param  {String} path Target path
+	 */
 	$scope.cd = function (path) {
 		updateList(path);
 	};

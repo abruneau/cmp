@@ -1,8 +1,11 @@
 'use strict';
 
 /**
+ *
+ * @memberof cmpApp
  * @ngdoc service
  * @name cmpApp.Accounts
+ * @param {service} database local database service
  * @description
  * # Accounts
  * Service in the cmpApp.
@@ -22,6 +25,10 @@ angular.module('cmpApp').factory('Accounts', function (database) {
 		});
 	};
 
+	/**
+	 * Update accout list from database
+	 * @memberof Accounts
+	 */
 	var updateList = function () {
 		database.find({
 			"attributes.type": 'Account'

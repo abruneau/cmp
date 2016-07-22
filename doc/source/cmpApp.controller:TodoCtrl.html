@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base href="../">
+    <title>JSDoc: source : todo.js</title>
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
+    <link href="css/site.css" type="text/css" rel="stylesheet">
+  </head>
+  <body ng-app="">
+    <nav id="toc">
+      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">
+      <div class="nav-wrapper">
+      <h2><a href="index.html">Index</a></h2>
+      <ul class="module">
+        <!-- undefined -->
+        <h2 class="module">
+          <a chref="" ng-click="moduleundefined = !moduleundefined">
+            module: undefined
+          </a>
+          <i ng-cloak="" ng-show="moduleundefined">+</i>
+        </h2>
+        <li id="undefined" ng-hide="moduleundefined">
+          <ul class="group">
+            <h2>
+              <a href="" ng-click="undefinedoverview = !undefinedoverview">
+                overview
+              </a>
+              <i ng-cloak="" ng-show="undefinedoverview">+</i>
+            </h2>
+            <ul ng-hide="undefinedoverview">
+              <li>
+                <a href="cmpApp.html">cmpApp</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul><ul class="module">
+        <!-- cmp_pp -->
+        <h2 class="module">
+          <a chref="" ng-click="modulecmp_pp = !modulecmp_pp">
+            module: cmpApp
+          </a>
+          <i ng-cloak="" ng-show="modulecmp_pp">+</i>
+        </h2>
+        <li id="cmpApp" ng-hide="modulecmp_pp">
+          <ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppcontroller = !cmp_ppcontroller">
+                controller
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppcontroller">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppcontroller">
+              <li>
+                <a href="cmpApp.AccountFilesCtrl.html">AccountFilesCtrl</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppservice = !cmp_ppservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppservice">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppservice">
+              <li>
+                <a href="cmpApp.Accounts.html">Accounts</a>
+              </li><li>
+                <a href="cmpApp.database.html">database</a>
+              </li><li>
+                <a href="cmpApp.evernote.html">evernote</a>
+              </li><li>
+                <a href="cmpApp.evernoteOsa.html">evernoteOsa</a>
+              </li><li>
+                <a href="cmpApp.Fs.html">Fs</a>
+              </li><li>
+                <a href="cmpApp.localAccount.html">localAccount</a>
+              </li><li>
+                <a href="cmpApp.Notes.html">Notes</a>
+              </li><li>
+                <a href="cmpApp.salesForce.html">salesForce</a>
+              </li><li>
+                <a href="cmpApp.Settings.html">Settings</a>
+              </li><li>
+                <a href="cmpApp.Todos.html">Todos</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppfunction = !cmp_ppfunction">
+                function
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppfunction">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppfunction">
+              <li>
+                <a href="cmpApp.controller_AboutCtrl.html">controller:AboutCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountFormCtrl.html">controller:AccountFormCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountNotesCtrl.html">controller:AccountNotesCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountsCtrl.html">controller:AccountsCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_MainCtrl.html">controller:MainCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_NavigationCtrl.html">controller:NavigationCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_ProfileCtrl.html">controller:ProfileCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_TodoCtrl.html">controller:TodoCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_WeatherCtrl.html">controller:WeatherCtrl</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppdirective = !cmp_ppdirective">
+                directive
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppdirective">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppdirective">
+              <li>
+                <a href="cmpApp.directive_files.html">directive:files</a>
+              </li><li>
+                <a href="cmpApp.directive_navigation.html">directive:navigation</a>
+              </li><li>
+                <a href="cmpApp.directive_notes.html">directive:notes</a>
+              </li><li>
+                <a href="cmpApp.directive_sglclick.html">directive:sglclick</a>
+              </li><li>
+                <a href="cmpApp.directive_todoEscape.html">directive:todoEscape</a>
+              </li><li>
+                <a href="cmpApp.directive_todoFocus.html">directive:todoFocus</a>
+              </li><li>
+                <a href="cmpApp.directive_Weather.html">directive:Weather</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+      </div>
+    </nav>
+    <div id="content" class="page-wrap">
+      <h1 class="title">
+        source : todo.js
+      </h1>
+      <div id="main" class="big-container">
+        <!-- source code html -->
+        <article>
+          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc function
+ * @name cmpApp.controller:TodoCtrl
+ * @description
+ * # TodoCtrl
+ * Controller of the cmpApp
+ */
+angular.module('cmpApp').controller('TodoCtrl', function ($scope, $filter, $routeParams, Todos) {
+	/*global moment */
+	var updateTodos = function () {
+		$scope.$apply(function () {
+			$scope.todos = Todos.list;
+		});
+	};
+	$scope.todos = [];
+	Todos.getAll();
+	Todos.registerObserverCallback(updateTodos);
+	$scope.newTodo = '';
+	$scope.editedTodo = null;
+	$scope.$watch('todos', function () {
+		$scope.remainingCount = $filter('filter')($scope.todos, {
+			completed: false
+		}).length;
+		$scope.completedCount = $scope.todos.length - $scope.remainingCount;
+		$scope.allChecked = !$scope.remainingCount;
+	}, true);
+	// Monitor the current route for changes and adjust the filter accordingly.
+	$scope.changeStatus = function (stat) {
+		var status = $scope.status = stat || '';
+		$scope.statusFilter = (status === 'active') ? {
+			completed: false
+		} : (status === 'completed') ? {
+			completed: true
+		} : {};
+	};
+	$scope.addTodo = function () {
+		if (!$scope.newTodo.task) {
+			return;
+		}
+		if (!$scope.newTodo.dueDate) {
+			$scope.newTodo.dueDate = moment().format();
+		}
+		var newTodo = {
+			attributes: {
+				type: 'Todo'
+			},
+			task: $scope.newTodo.task.trim(),
+			dueDate: $scope.newTodo.dueDate,
+			completed: false
+		};
+		$scope.saving = true;
+		Todos.add(newTodo);
+		$scope.newTodo = '';
+		$scope.saving = false;
+	};
+	$scope.editTodo = function (todo) {
+		$scope.editedTodo = todo;
+		// Clone the original todo to restore it on demand.
+		$scope.originalTodo = angular.extend({}, todo);
+	};
+	$scope.saveEdits = function (todo, event) {
+		// Blur events are automatically triggered after the form submit event.
+		// This does some unfortunate logic handling to prevent saving twice.
+		if (event === 'blur' && $scope.saveEvent === 'submit') {
+			$scope.saveEvent = null;
+			return;
+		}
+		$scope.saveEvent = event;
+		if ($scope.reverted) {
+			// Todo edits were reverted-- don't save.
+			$scope.reverted = null;
+			return;
+		}
+		todo.task = todo.task.trim();
+		if (todo.task === $scope.originalTodo.task) {
+			$scope.editedTodo = null;
+			return;
+		}
+		if (todo.task) {
+			Todos.update(todo);
+			$scope.editedTodo = null;
+		} else {
+			Todos.del(todo);
+			var index = $scope.todos.indexOf(todo);
+			$scope.todo.splice(index, 1);
+		}
+	};
+	$scope.revertEdits = function (todo) {
+		$scope.todos[$scope.todos.indexOf(todo)] = $scope.originalTodo;
+		$scope.editedTodo = null;
+		$scope.originalTodo = null;
+		$scope.reverted = true;
+	};
+	$scope.removeTodo = function (todo) {
+		Todos.del(todo);
+		var index = $scope.todos.indexOf(todo);
+		$scope.todos.splice(index, 1);
+	};
+	$scope.saveTodo = function (todo) {
+		Todos.update(todo);
+	};
+	$scope.toggleCompleted = function (todo, completed) {
+		if (angular.isDefined(completed)) {
+			todo.completed = completed;
+		}
+		Todos.update(todo);
+	};
+	$scope.clearCompletedTodos = function () {
+		$scope.todos.forEach(function (todo) {
+			if (todo.completed) {
+				$scope.removeTodo(todo);
+			}
+		});
+	};
+	$scope.markAll = function (completed) {
+		$scope.todos.forEach(function (todo) {
+			if (todo.completed !== completed) {
+				$scope.toggleCompleted(todo, completed);
+			}
+		});
+	};
+	$scope.isLate = function (todo) {
+		if (moment(todo.dueDate).isBefore(moment(), 'day') && !todo.completed) {
+			return {'background-color':'#f2dede'};
+		}
+	};
+	$scope.formatDate = function (date) {
+		date = moment(date);
+		return date.calendar();
+		// if (date.isSame(moment(), 'day')) {
+		//     // date is Today
+		//     return 'Today ' + date.format('HH:mm');
+		// } else if (date.isSame(moment().add(1, 'days'), 'day')) {
+		//     return 'Tomorrow ' + date.format('HH:mm');
+		// } else if (date.isSame(moment(), 'week')) {
+		//     return 'This week ' + date.format('ddd HH:mm');
+		// } else {
+		//     return date.format();
+		// }
+	};
+});
+</code></pre>
+        </article>
+        <!-- index.html -->
+        <!-- class files -->
+      </div>
+      <footer style="clear:both">
+        Documentation generated by
+        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+        using
+        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
+      </footer>
+    </div>
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/site.js"></script>
+    <!--%= prettyJson %-->
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
+    </script>
+  </body>
+</html>

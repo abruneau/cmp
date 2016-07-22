@@ -1,6 +1,7 @@
 'use strict';
 
 /**
+ * @memberof cmpApp
  * @ngdoc directive
  * @name cmpApp.directive:files
  * @description

@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base href="../">
+    <title>JSDoc: source : evernote.js</title>
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
+    <link href="css/site.css" type="text/css" rel="stylesheet">
+  </head>
+  <body ng-app="">
+    <nav id="toc">
+      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">
+      <div class="nav-wrapper">
+      <h2><a href="index.html">Index</a></h2>
+      <ul class="module">
+        <!-- undefined -->
+        <h2 class="module">
+          <a chref="" ng-click="moduleundefined = !moduleundefined">
+            module: undefined
+          </a>
+          <i ng-cloak="" ng-show="moduleundefined">+</i>
+        </h2>
+        <li id="undefined" ng-hide="moduleundefined">
+          <ul class="group">
+            <h2>
+              <a href="" ng-click="undefinedoverview = !undefinedoverview">
+                overview
+              </a>
+              <i ng-cloak="" ng-show="undefinedoverview">+</i>
+            </h2>
+            <ul ng-hide="undefinedoverview">
+              <li>
+                <a href="cmpApp.html">cmpApp</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul><ul class="module">
+        <!-- cmp_pp -->
+        <h2 class="module">
+          <a chref="" ng-click="modulecmp_pp = !modulecmp_pp">
+            module: cmpApp
+          </a>
+          <i ng-cloak="" ng-show="modulecmp_pp">+</i>
+        </h2>
+        <li id="cmpApp" ng-hide="modulecmp_pp">
+          <ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppcontroller = !cmp_ppcontroller">
+                controller
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppcontroller">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppcontroller">
+              <li>
+                <a href="cmpApp.AccountFilesCtrl.html">AccountFilesCtrl</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppservice = !cmp_ppservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppservice">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppservice">
+              <li>
+                <a href="cmpApp.Accounts.html">Accounts</a>
+              </li><li>
+                <a href="cmpApp.database.html">database</a>
+              </li><li>
+                <a href="cmpApp.evernote.html">evernote</a>
+              </li><li>
+                <a href="cmpApp.evernoteOsa.html">evernoteOsa</a>
+              </li><li>
+                <a href="cmpApp.Fs.html">Fs</a>
+              </li><li>
+                <a href="cmpApp.localAccount.html">localAccount</a>
+              </li><li>
+                <a href="cmpApp.Notes.html">Notes</a>
+              </li><li>
+                <a href="cmpApp.salesForce.html">salesForce</a>
+              </li><li>
+                <a href="cmpApp.Settings.html">Settings</a>
+              </li><li>
+                <a href="cmpApp.Todos.html">Todos</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppfunction = !cmp_ppfunction">
+                function
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppfunction">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppfunction">
+              <li>
+                <a href="cmpApp.controller_AboutCtrl.html">controller:AboutCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountFormCtrl.html">controller:AccountFormCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountNotesCtrl.html">controller:AccountNotesCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountsCtrl.html">controller:AccountsCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_MainCtrl.html">controller:MainCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_NavigationCtrl.html">controller:NavigationCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_ProfileCtrl.html">controller:ProfileCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_TodoCtrl.html">controller:TodoCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_WeatherCtrl.html">controller:WeatherCtrl</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppdirective = !cmp_ppdirective">
+                directive
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppdirective">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppdirective">
+              <li>
+                <a href="cmpApp.directive_files.html">directive:files</a>
+              </li><li>
+                <a href="cmpApp.directive_navigation.html">directive:navigation</a>
+              </li><li>
+                <a href="cmpApp.directive_notes.html">directive:notes</a>
+              </li><li>
+                <a href="cmpApp.directive_sglclick.html">directive:sglclick</a>
+              </li><li>
+                <a href="cmpApp.directive_todoEscape.html">directive:todoEscape</a>
+              </li><li>
+                <a href="cmpApp.directive_todoFocus.html">directive:todoFocus</a>
+              </li><li>
+                <a href="cmpApp.directive_Weather.html">directive:Weather</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+      </div>
+    </nav>
+    <div id="content" class="page-wrap">
+      <h1 class="title">
+        source : evernote.js
+      </h1>
+      <div id="main" class="big-container">
+        <!-- source code html -->
+        <article>
+          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc service
+ * @name cmpApp.evernote
+ * @description
+ * # evernote
+ * Factory in the cmpApp.
+ */
+angular.module('cmpApp').factory('evernote', function (evernoteOsa, $rootScope) {
+	/*global toMarkdown */
+	var self = this;
+	var observerCallbacks = [];
+	var osascript = require('osascript').eval;
+	var noteList = [];
+	var noteInfo = null;
+	var html = null;
+	$rootScope.$on('$locationChangeSuccess', function () {
+		self.noteInfo = null;
+		self.html = null;
+	});
+	//call this when you know 'foo' has been changed
+	var notifyObservers = function () {
+		angular.forEach(observerCallbacks, function (callback) {
+			callback();
+		});
+	};
+	//////////////
+	// Notebook //
+	//////////////
+	var notebookExists = function (name) {
+		var deasync = require('deasync');
+		var osa = deasync(osascript);
+		try {
+			return JSON.parse(osa(evernoteOsa.notebookExists(name), {
+				flags: ['-s', 's'],
+				type: 'AppleScript'
+			}));
+		} catch (e) {
+			console.log(e);
+		}
+	};
+	var createNotebook = function (name) {
+		osascript(evernoteOsa.createNotebook(name), {
+			flags: ['-s', 's']
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+	};
+	var getNoteList = function (notebook) {
+		osascript(evernoteOsa.getNoteList(notebook), {
+			flags: ['-s', 's']
+		}, function (err, result) {
+			if (err) {
+				console.log(err);
+			}
+			if (result) {
+				self.noteList = JSON.parse(result);
+				// self.noteList = JSON.parse(result.toString());
+				notifyObservers();
+			}
+		});
+	};
+	//////////
+	// Note //
+	//////////
+	var getNoteInfo = function (note) {
+		if (note) {
+			osascript(evernoteOsa.getNoteInfo(note), {
+				flags: ['-s', 's']
+			}, function (err, result) {
+				if (err) {
+					console.log(err);
+				}
+				if (result) {
+					self.noteInfo = JSON.parse(result.toString());
+					notifyObservers();
+				}
+			});
+		}
+	};
+	var getHtml = function (note) {
+		osascript(evernoteOsa.getHtml(note), {
+			flags: ['-s', 's']
+		}, function (err, result) {
+			if (err) {
+				console.log(err);
+			}
+			if (result) {
+				self.html = result.replace(/\\n/g, '').replace(/\"/g, '').replace(/\\/g, '');
+				notifyObservers();
+			}
+		});
+	};
+	var getHtmlSync = function (note) {
+		var deasync = require('deasync');
+		var osa = deasync(osascript);
+		try {
+			return osa(evernoteOsa.getHtml(note), {
+				flags: ['-s', 's']
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	};
+	var updateHtml = function (note, newHtml) {
+		osascript(evernoteOsa.updateHtml(note, newHtml), {
+			flags: ['-s', 's']
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+	};
+	var createNote = function (title, notebook) {
+		osascript(evernoteOsa.createNote(title, notebook), {
+			flags: ['-s', 's']
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				getNoteList(notebook);
+			}
+		});
+	};
+	var createNoteWithHtml = function (title, notebook, html) {
+		osascript(evernoteOsa.createNote(title, notebook, html), {
+			flags: ['-s', 's']
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				getNoteList(notebook);
+			}
+		});
+	};
+	var deleteNote = function (note) {
+		osascript(evernoteOsa.deleteNote(note), {
+			flags: ['-s', 's']
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			} else {
+				self.html = null;
+				getNoteList(note.notebook);
+			}
+		});
+	};
+	var openNote = function (note) {
+		osascript(evernoteOsa.openNote(note), {
+			flags: ['-s', 's'],
+			type: 'AppleScript'
+		}, function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+	};
+	var Html2md = function (html) {
+		var cheerio = require('cheerio'),
+			$ = cheerio.load(html);
+		// TOC
+		$('.table-of-contents').replaceWith('{!toc}');
+		// Checkbox
+		$("input[type=checkbox]").each(function () {
+			var md = "";
+			if ($(this).checked) {
+				md += "[x]";
+			} else {
+				md += "[ ]";
+			}
+			var text = $(this).parentElement.childNodes[1].textContent;
+			md += " " + text;
+			$(this).replaceWith(md);
+		});
+		html = $.html();
+		html = html.replace(/nobreakspace/g, '&nbsp;');
+		var markdown = toMarkdown(html).replace(/&#xA0;/g, ' ').replace(/&nbsp;/g, '     ');
+		markdown = markdown.replace(/\n\*\s\*\s\*\s*\n/g, '\n------\n');
+		markdown = markdown.replace(/(^|\n)((?:)|(?:[>\s]+))\*\s{3}/g, '$1$2-   ');
+		markdown = markdown.replace(/&lt;div id=\"en-note\">/g, "");
+		markdown = markdown.replace("&lt;/div>", "");
+		return markdown;
+	};
+	//register an observer
+	self.registerObserverCallback = function (callback) {
+		observerCallbacks.push(callback);
+	};
+	// Variables
+	self.noteList = noteList;
+	self.noteInfo = noteInfo;
+	self.html = html;
+	// Functions
+	self.notebookExists = notebookExists;
+	self.createNotebook = createNotebook;
+	self.getNoteList = getNoteList;
+	self.getNoteInfo = getNoteInfo;
+	self.getHtml = getHtml;
+	self.getHtmlSync = getHtmlSync;
+	self.updateHtml = updateHtml;
+	self.Html2md = Html2md;
+	self.createNote = createNote;
+	self.createNoteWithHtml = createNoteWithHtml;
+	self.deleteNote = deleteNote;
+	self.openNote = openNote;
+	return self;
+});
+</code></pre>
+        </article>
+        <!-- index.html -->
+        <!-- class files -->
+      </div>
+      <footer style="clear:both">
+        Documentation generated by
+        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+        using
+        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
+      </footer>
+    </div>
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/site.js"></script>
+    <!--%= prettyJson %-->
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
+    </script>
+  </body>
+</html>

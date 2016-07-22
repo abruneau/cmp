@@ -1,0 +1,403 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base href="../">
+    <title>JSDoc: source : account_notes.js</title>
+    <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
+    <link href="css/site.css" type="text/css" rel="stylesheet">
+  </head>
+  <body ng-app="">
+    <nav id="toc">
+      <input placeholder="Filter" id="filter-input" class="col12 block field" type="text">
+      <div class="nav-wrapper">
+      <h2><a href="index.html">Index</a></h2>
+      <ul class="module">
+        <!-- undefined -->
+        <h2 class="module">
+          <a chref="" ng-click="moduleundefined = !moduleundefined">
+            module: undefined
+          </a>
+          <i ng-cloak="" ng-show="moduleundefined">+</i>
+        </h2>
+        <li id="undefined" ng-hide="moduleundefined">
+          <ul class="group">
+            <h2>
+              <a href="" ng-click="undefinedoverview = !undefinedoverview">
+                overview
+              </a>
+              <i ng-cloak="" ng-show="undefinedoverview">+</i>
+            </h2>
+            <ul ng-hide="undefinedoverview">
+              <li>
+                <a href="cmpApp.html">cmpApp</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul><ul class="module">
+        <!-- cmp_pp -->
+        <h2 class="module">
+          <a chref="" ng-click="modulecmp_pp = !modulecmp_pp">
+            module: cmpApp
+          </a>
+          <i ng-cloak="" ng-show="modulecmp_pp">+</i>
+        </h2>
+        <li id="cmpApp" ng-hide="modulecmp_pp">
+          <ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppcontroller = !cmp_ppcontroller">
+                controller
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppcontroller">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppcontroller">
+              <li>
+                <a href="cmpApp.AccountFilesCtrl.html">AccountFilesCtrl</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppservice = !cmp_ppservice">
+                service
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppservice">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppservice">
+              <li>
+                <a href="cmpApp.Accounts.html">Accounts</a>
+              </li><li>
+                <a href="cmpApp.database.html">database</a>
+              </li><li>
+                <a href="cmpApp.evernote.html">evernote</a>
+              </li><li>
+                <a href="cmpApp.evernoteOsa.html">evernoteOsa</a>
+              </li><li>
+                <a href="cmpApp.Fs.html">Fs</a>
+              </li><li>
+                <a href="cmpApp.localAccount.html">localAccount</a>
+              </li><li>
+                <a href="cmpApp.Notes.html">Notes</a>
+              </li><li>
+                <a href="cmpApp.salesForce.html">salesForce</a>
+              </li><li>
+                <a href="cmpApp.Settings.html">Settings</a>
+              </li><li>
+                <a href="cmpApp.Todos.html">Todos</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppfunction = !cmp_ppfunction">
+                function
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppfunction">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppfunction">
+              <li>
+                <a href="cmpApp.controller_AboutCtrl.html">controller:AboutCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountFormCtrl.html">controller:AccountFormCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountNotesCtrl.html">controller:AccountNotesCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_AccountsCtrl.html">controller:AccountsCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_MainCtrl.html">controller:MainCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_NavigationCtrl.html">controller:NavigationCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_ProfileCtrl.html">controller:ProfileCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_TodoCtrl.html">controller:TodoCtrl</a>
+              </li><li>
+                <a href="cmpApp.controller_WeatherCtrl.html">controller:WeatherCtrl</a>
+              </li>
+            </ul>
+          </ul><ul class="group">
+            <h2>
+              <a href="" ng-click="cmp_ppdirective = !cmp_ppdirective">
+                directive
+              </a>
+              <i ng-cloak="" ng-show="cmp_ppdirective">+</i>
+            </h2>
+            <ul ng-hide="cmp_ppdirective">
+              <li>
+                <a href="cmpApp.directive_files.html">directive:files</a>
+              </li><li>
+                <a href="cmpApp.directive_navigation.html">directive:navigation</a>
+              </li><li>
+                <a href="cmpApp.directive_notes.html">directive:notes</a>
+              </li><li>
+                <a href="cmpApp.directive_sglclick.html">directive:sglclick</a>
+              </li><li>
+                <a href="cmpApp.directive_todoEscape.html">directive:todoEscape</a>
+              </li><li>
+                <a href="cmpApp.directive_todoFocus.html">directive:todoFocus</a>
+              </li><li>
+                <a href="cmpApp.directive_Weather.html">directive:Weather</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+      </div>
+    </nav>
+    <div id="content" class="page-wrap">
+      <h1 class="title">
+        source : account_notes.js
+      </h1>
+      <div id="main" class="big-container">
+        <!-- source code html -->
+        <article>
+          <pre class="prettyprint source linenums"><code>'use strict';
+/**
+ * @ngdoc function
+ * @name cmpApp.controller:AccountNotesCtrl
+ * @description
+ * # AccountNotesCtrl
+ * Controller of the cmpApp
+ */
+angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Notes, localAccount, Settings, Accounts, $scope, $sce, $window, $routeParams) {
+	/*global moment */
+	/*global $ */
+	/*global EpicEditor */
+	var accountId = $routeParams.id;
+	var MarkdownIt = require('markdown-it')()
+		.use(require('markdown-it-checkbox'))
+		.use(require('markdown-it-emoji'))
+		.use(require('markdown-it-highlightjs'))
+		.use(require('markdown-it-contents'), {
+			className: 'table-of-contents'
+		});
+	var markdown = function (md) {
+		return MarkdownIt.render(md);
+	};
+	var opts = {
+		container: 'epiceditor',
+		textarea: 'my-edit-area',
+		basePath: '../bower_components/EpicEditor/epiceditor/',
+		clientSideStorage: false,
+		localStorageName: 'epiceditor',
+		useNativeFullscreen: true,
+		parser: markdown,
+		file: {
+			name: 'epiceditor',
+			defaultContent: '',
+			autoSave: 100
+		},
+		theme: {
+			base: '/themes/base/epiceditor.css',
+			preview: '/themes/preview/github.css',
+			editor: '/themes/editor/epic-dark.css'
+		},
+		button: {
+			preview: true,
+			fullscreen: true,
+			bar: "auto"
+		},
+		focusOnLoad: false,
+		shortcut: {
+			modifier: 18,
+			fullscreen: 70,
+			preview: 80
+		},
+		string: {
+			togglePreview: 'Toggle Preview Mode',
+			toggleEdit: 'Toggle Edit Mode',
+			toggleFullscreen: 'Enter Fullscreen'
+		},
+		autogrow: true
+	};
+	var localSave = false;
+	var evernoteSave = false;
+	var notebook = null;
+	var evernoteList = [];
+	function testSync() {
+		if (evernoteSave && localSave) {
+			$scope.syncOption = true;
+		}
+	}
+	var updateEvernote = function () {
+		if ($scope.notebookExists === false) {
+			evernote.createNotebook(notebook);
+		}
+		if (evernoteSave && !localSave) {
+			$scope.noteList = evernote.noteList;
+			$scope.html = $sce.trustAsHtml(evernote.html);
+			if ($scope.html) {
+				$scope.md = evernote.Html2md($scope.html.toString());
+			}
+		} else {
+			evernoteList = evernote.noteList;
+			testSync();
+		}
+	};
+	function init() {
+		if ($scope.settings && $scope.localInfo) {
+			notebook = Accounts.selected.Name;
+			if ($scope.settings.noteSaveMode.indexOf('e') > -1) {
+				evernoteSave = true;
+				evernote.registerObserverCallback(updateEvernote);
+				$scope.notebookExists = evernote.notebookExists(notebook);
+				evernote.getNoteList(notebook);
+			}
+			if ($scope.settings.noteSaveMode.indexOf('l') > -1) {
+				localSave = true;
+				var path = $scope.localInfo.path;
+				if (path) {
+					if (!Notes.folderExist(path)) {
+						Notes.createFolder(path);
+					}
+					$scope.noteList = Notes.getNoteList(path, notebook);
+				} else {
+					console.log("Path not set");
+				}
+			}
+		}
+	}
+	var updateSettings = function () {
+		$scope.$apply(function () {
+			$scope.settings = Settings.settings;
+			init();
+		});
+	};
+	var updateLocalInfo = function () {
+		$scope.localInfo = localAccount.selected;
+		init();
+	};
+	$scope.notebookExists = true;
+	$scope.editMode = false;
+	$scope.note = null;
+	$scope.newNoteTitle = '';
+	$scope.md = '';
+	$scope.syncOption = false;
+	$scope.formatDate = function (date) {
+		return moment(date).calendar();
+	};
+	$scope.loadNote = function (note) {
+		$scope.note = note;
+		$scope.editMode = false;
+		if (localSave) {
+			$scope.md = Notes.getMd(note.path);
+			$scope.html = $sce.trustAsHtml(MarkdownIt.render($scope.md));
+		}
+		if (evernoteSave && !localSave) {
+			evernote.getHtml(note);
+			evernote.getNoteInfo(note);
+		}
+	};
+	$scope.createNotebook = function () {
+		evernote.createNotebook(notebook);
+	};
+	$scope.createNote = function () {
+		var title = $scope.newNoteTitle.replace(/\\/g, '.');
+		if (localSave) {
+			Notes.createNote(title, $scope.localInfo.path);
+			$scope.noteList = Notes.getNoteList($scope.localInfo.path);
+		}
+		if (evernoteSave) {
+			evernote.createNote(title, notebook);
+		}
+		$scope.newNoteTitle = '';
+	};
+	$scope.deleteNote = function (note) {
+		if (note) {
+			var r = $window.confirm("Please confirm deletion of note " + note.title);
+			if (r) {
+				$scope.note = null;
+				$scope.html = '';
+				if (localSave) {
+					Notes.deleteNote(note.path);
+					$scope.noteList = Notes.getNoteList($scope.localInfo.path);
+				}
+				if (evernoteSave) {
+					evernote.deleteNote(note);
+				}
+			}
+		}
+	};
+	$scope.changeEditMode = function () {
+		$scope.editMode = !$scope.editMode;
+		if (!$scope.editMode) {
+			$scope.md = $("#my-edit-area").val();
+			var newHtml = MarkdownIt.render($scope.md.toString());
+			$scope.html = $sce.trustAsHtml(newHtml);
+		} else {
+			setTimeout(function () {
+				new EpicEditor(opts).load();
+			}, 200);
+		}
+	};
+	$scope.save = function (note) {
+		if ($scope.editMode) {
+			$scope.md = $("#my-edit-area").val();
+			var newHtml = MarkdownIt.render($scope.md.toString());
+			$scope.html = $sce.trustAsHtml(newHtml);
+		}
+		if (localSave) {
+			Notes.updateMd(note.path, $scope.md);
+		}
+		if (evernoteSave) {
+			evernote.updateHtml(note, $scope.html);
+		}
+	};
+	$scope.open = function (note) {
+		if (evernoteSave) {
+			evernote.openNote(note);
+		}
+	};
+	$scope.syncNotes = function () {
+		for (var i in evernoteList) {
+			var match = $.grep($scope.noteList, function (e) {
+				return e.title === evernoteList[i].title;
+			});
+			if (match.length === 0) {
+				var html = evernote.getHtmlSync(evernoteList[i]);
+				var md = evernote.Html2md(html.toString());
+				var path = $scope.localInfo.path + '/notes/' + evernoteList[i].title.replace(/\//g, '.') + '.md';
+				Notes.updateMd(path, md);
+			}
+		}
+		var noteList = $scope.noteList;
+		for (var j in noteList) {
+			var match2 = $.grep(evernoteList, function (e) {
+				return e.title == noteList[i].title;
+			});
+			if (match2.length === 0) {
+				var md2 = Notes.getMd(noteList[j].path);
+				var html2 = MarkdownIt.render(md2);
+				var title = noteList[j].title;
+				evernote.createNoteWithHtml(title, notebook, html2);
+			}
+		}
+		$scope.noteList = Notes.getNoteList($scope.localInfo.path);
+	};
+	Settings.registerObserverCallback(updateSettings);
+	localAccount.registerObserverCallback(updateLocalInfo);
+	Settings.get();
+	localAccount.get(accountId);
+});
+</code></pre>
+        </article>
+        <!-- index.html -->
+        <!-- class files -->
+      </div>
+      <footer style="clear:both">
+        Documentation generated by
+        <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a>
+        using
+        <a href="https://github.com/allenhwkim/angular-jsdoc">Angular-JSDoc template</a>
+      </footer>
+    </div>
+    <script src="js/prettify.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/site.js"></script>
+    <!--%= prettyJson %-->
+    <script>
+      prettyPrint();
+      var lineNo = window.location.hash.match(/#line([0-9]+)$/);
+      lineNo && document.querySelector("ol li:nth-child("+(lineNo[1])+")").scrollIntoView();
+    </script>
+  </body>
+</html>

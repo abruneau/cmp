@@ -26,8 +26,6 @@ module.exports = function (grunt) {
 		dist: 'dist'
 	};
 
-	grunt.loadNpmTasks('grunt-bower');
-
 	// Define the configuration for all the tasks
 	grunt.initConfig({
 
@@ -207,7 +205,6 @@ module.exports = function (grunt) {
 		wiredep: {
 			app: {
 				src: ['<%= yeoman.app %>/index.html'],
-				//ignorePath: /\.\.\//
 			},
 			test: {
 				devDependencies: true,
@@ -406,12 +403,14 @@ module.exports = function (grunt) {
 					dest: '<%= yeoman.dist %>/bower_components/jquery/dist/'
 				}, {
 					expand: true,
+					cwd: '',
+					src: 'package.json',
+					dest: '<%= yeoman.dist %>'
+				}, {
+					expand: true,
 					cwd: '<%= yeoman.app %>',
 					dest: '<%= yeoman.dist %>',
-					src: [
-						'index.js',
-						'package.json'
-					]
+					src: 'index.js'
 				}]
 			},
 			styles: {
@@ -442,30 +441,6 @@ module.exports = function (grunt) {
 			unit: {
 				configFile: 'test/karma.conf.js',
 				singleRun: true
-			}
-		},
-
-		bower: {
-			dev: {
-				dest: 'app/bower_components',
-				options: {
-					expand: true,
-					packageSpecific: {
-						'EpicEditor': {
-							files: [
-								'epiceditor/themes/base/*',
-								'epiceditor/themes/editor/*',
-								'epiceditor/themes/preview/*'
-							]
-						},
-						'angular-bootstrap-datetimepicker': {
-							files: [
-								'src/css/datetimepicker.css',
-								'src/js/datetimepicker.templates.js'
-							]
-						}
-					}
-				}
 			}
 		},
 
@@ -534,7 +509,6 @@ module.exports = function (grunt) {
 	]);
 
 	grunt.registerTask('start', [
-		//'bower',
 		'wiredep',
 		'clean:server',
 		'concurrent:server',

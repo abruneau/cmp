@@ -11,6 +11,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 
 	/*global moment */
 	/*global $ */
+	/*global EpicEditor */
 
 	var accountId = $routeParams.id;
 
@@ -21,6 +22,47 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		.use(require('markdown-it-contents'), {
 			className: 'table-of-contents'
 		});
+
+	var markdown = function (md) {
+		return MarkdownIt.render(md);
+	};
+
+	var opts = {
+		container: 'epiceditor',
+		textarea: 'my-edit-area',
+		basePath: '../bower_components/EpicEditor/epiceditor/',
+		clientSideStorage: false,
+		localStorageName: 'epiceditor',
+		useNativeFullscreen: true,
+		parser: markdown,
+		file: {
+			name: 'epiceditor',
+			defaultContent: '',
+			autoSave: 100
+		},
+		theme: {
+			base: '/themes/base/epiceditor.css',
+			preview: '/themes/preview/github.css',
+			editor: '/themes/editor/epic-dark.css'
+		},
+		button: {
+			preview: true,
+			fullscreen: true,
+			bar: "auto"
+		},
+		focusOnLoad: false,
+		shortcut: {
+			modifier: 18,
+			fullscreen: 70,
+			preview: 80
+		},
+		string: {
+			togglePreview: 'Toggle Preview Mode',
+			toggleEdit: 'Toggle Edit Mode',
+			toggleFullscreen: 'Enter Fullscreen'
+		},
+		autogrow: true
+	};
 
 	var localSave = false;
 	var evernoteSave = false;
@@ -143,12 +185,17 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	};
 
 	$scope.changeEditMode = function () {
-		if ($scope.editMode) {
+		$scope.editMode = !$scope.editMode;
+		if (!$scope.editMode) {
 			$scope.md = $("#my-edit-area").val();
 			var newHtml = MarkdownIt.render($scope.md.toString());
 			$scope.html = $sce.trustAsHtml(newHtml);
+		} else {
+			setTimeout(function () {
+				new EpicEditor(opts).load();
+			}, 200);
 		}
-		$scope.editMode = !$scope.editMode;
+
 	};
 
 	$scope.save = function (note) {

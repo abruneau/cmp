@@ -1,4 +1,4 @@
-// Generated on 2016-06-13 using generator-angular 0.15.1
+// Generated on 2016-07-22 using generator-angular 0.15.1
 'use strict';
 
 // # Globbing
@@ -12,6 +12,7 @@ module.exports = function (grunt) {
 	// Time how long tasks take. Can help when optimizing build times
 	require('time-grunt')(grunt);
 	require('load-grunt-tasks')(grunt);
+	grunt.loadNpmTasks('grunt-install-dependencies');
 
 	// Automatically load required Grunt tasks
 	require('jit-grunt')(grunt, {
@@ -36,7 +37,7 @@ module.exports = function (grunt) {
 		watch: {
 			bower: {
 				files: ['bower.json'],
-				tasks: ['wiredep', 'bower']
+				tasks: ['wiredep']
 			},
 			js: {
 				files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
@@ -205,6 +206,10 @@ module.exports = function (grunt) {
 		wiredep: {
 			app: {
 				src: ['<%= yeoman.app %>/index.html'],
+				ignorePath: /\.\.\//
+			},
+			dev: {
+				src: ['<%= yeoman.app %>/index.html']
 			},
 			test: {
 				devDependencies: true,
@@ -342,7 +347,7 @@ module.exports = function (grunt) {
 		ngtemplates: {
 			dist: {
 				options: {
-					module: 'cmp2App',
+					module: 'cmpApp',
 					htmlmin: '<%= htmlmin.dist.options %>',
 					usemin: 'scripts/scripts.js'
 				},
@@ -384,7 +389,8 @@ module.exports = function (grunt) {
 						'*.{ico,png,txt}',
 						'*.html',
 						'images/{,*/}*.{webp}',
-						'styles/fonts/{,*/}*.*'
+						'styles/fonts/{,*/}*.*',
+						'index.js'
 					]
 				}, {
 					expand: true,
@@ -398,19 +404,14 @@ module.exports = function (grunt) {
 					dest: '<%= yeoman.dist %>'
 				}, {
 					expand: true,
-					cwd: 'bower_components/jquery/dist/',
-					src: 'jquery.js',
-					dest: '<%= yeoman.dist %>/bower_components/jquery/dist/'
+					cwd: 'bower_components/font-awesome/',
+					src: 'fonts/*',
+					dest: '<%= yeoman.dist %>'
 				}, {
 					expand: true,
 					cwd: '',
 					src: 'package.json',
 					dest: '<%= yeoman.dist %>'
-				}, {
-					expand: true,
-					cwd: '<%= yeoman.app %>',
-					dest: '<%= yeoman.dist %>',
-					src: 'index.js'
 				}]
 			},
 			styles: {
@@ -436,14 +437,6 @@ module.exports = function (grunt) {
 			]
 		},
 
-		// Test settings
-		karma: {
-			unit: {
-				configFile: 'test/karma.conf.js',
-				singleRun: true
-			}
-		},
-
 		shell: {
 			options: {
 				stderr: false
@@ -451,8 +444,24 @@ module.exports = function (grunt) {
 			target: {
 				command: 'electron .'
 			}
+		},
+
+		'install-dependencies': {
+			options: {
+				cwd: '<%= yeoman.dist %>'
+			}
+		},
+
+
+		// Test settings
+		karma: {
+			unit: {
+				configFile: 'test/karma.conf.js',
+				singleRun: true
+			}
 		}
 	});
+	grunt.loadNpmTasks('grunt-install-dependencies');
 
 	grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
 		if (target === 'dist') {
@@ -461,11 +470,10 @@ module.exports = function (grunt) {
 
 		grunt.task.run([
 			'clean:server',
-			'wiredep',
+			'wiredep:dev',
 			'concurrent:server',
 			'postcss:server',
-			'connect:livereload',
-			'watch'
+			'shell'
 		]);
 	});
 
@@ -485,7 +493,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('build', [
 		'clean:dist',
-		'wiredep',
+		'wiredep:app',
 		'useminPrepare',
 		'concurrent:dist',
 		'postcss',
@@ -498,7 +506,8 @@ module.exports = function (grunt) {
 		'uglify',
 		'filerev',
 		'usemin',
-		'htmlmin'
+		'htmlmin',
+		'install-dependencies'
 	]);
 
 	grunt.registerTask('default', [
@@ -506,13 +515,5 @@ module.exports = function (grunt) {
 		'newer:jscs',
 		'test',
 		'build'
-	]);
-
-	grunt.registerTask('start', [
-		'wiredep',
-		'clean:server',
-		'concurrent:server',
-		'postcss:server',
-		'shell'
 	]);
 };

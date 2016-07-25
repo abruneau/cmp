@@ -1,8 +1,18 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cmpApp.controller:AccountNotesCtrl
+ * @memberof cmpApp
+ * @ngdoc controller
+ * @name AccountNotesCtrl
+ * @param $scope {service} controller scope
+ * @param $sce {service}
+ * @param $windows {service} windows scope
+ * @param $routeParams {service} route scope
+ * @param evernote {service} evernote service
+ * @param Notes {service} Notes service
+ * @param localAccount {service} local infos
+ * @param Settings {service} Settings service
+ * @param Accounts {service} Accounts service
  * @description
  * # AccountNotesCtrl
  * Controller of the cmpApp
@@ -69,12 +79,23 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	var notebook = null;
 	var evernoteList = [];
 
+
+	/**
+	 * Test syncronisation between Evernote and local notes
+	 * @memberof AccountNotesCtrl
+	 * @function testSync
+	 */
 	function testSync() {
 		if (evernoteSave && localSave) {
 			$scope.syncOption = true;
 		}
 	}
 
+	/**
+	 * Update an Evernote note
+	 * @memberof AccountNotesCtrl
+	 * @function updateEvernote
+	 */
 	var updateEvernote = function () {
 		if ($scope.notebookExists === false) {
 			evernote.createNotebook(notebook);
@@ -91,6 +112,11 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		}
 	};
 
+	/**
+	 * Initialize note environnement
+	 * @memberof AccountNotesCtrl
+	 * @function init
+	 */
 	function init() {
 		if ($scope.settings && $scope.localInfo) {
 			notebook = Accounts.selected.Name;
@@ -115,6 +141,11 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		}
 	}
 
+	/**
+	 * Observer Callback for Settings
+	 * @memberof AccountNotesCtrl
+	 * @function updateSettings
+	 */
 	var updateSettings = function () {
 		$scope.$apply(function () {
 			$scope.settings = Settings.settings;
@@ -122,6 +153,11 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		});
 	};
 
+	/**
+	 * Observer Callback for local infos
+	 * @memberof AccountNotesCtrl
+	 * @function updateLocalInfo
+	 */
 	var updateLocalInfo = function () {
 		$scope.localInfo = localAccount.selected;
 		init();
@@ -134,10 +170,23 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	$scope.md = '';
 	$scope.syncOption = false;
 
+	/**
+	 * Format dates to readable dates
+	 * @memberof AccountNotesCtrl
+	 * @function formatDate
+	 * @param  {String} date
+	 * @return {String}      Formated date
+	 */
 	$scope.formatDate = function (date) {
 		return moment(date).calendar();
 	};
 
+	/**
+	 * Load selected note
+	 * @memberof AccountNotesCtrl
+	 * @function loadNote
+	 * @param  {Object} note Note to load
+	 */
 	$scope.loadNote = function (note) {
 		$scope.note = note;
 		$scope.editMode = false;
@@ -151,10 +200,20 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		}
 	};
 
+	/**
+	 * Create a Notebook in Evernote
+	 * @memberof AccountNotesCtrl
+	 * @function createNotebook
+	 */
 	$scope.createNotebook = function () {
 		evernote.createNotebook(notebook);
 	};
 
+	/**
+	 * Create a new note
+	 * @memberof AccountNotesCtrl
+	 * @function createNote
+	 */
 	$scope.createNote = function () {
 		var title = $scope.newNoteTitle.replace(/\\/g, '.');
 		if (localSave) {
@@ -167,6 +226,12 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		$scope.newNoteTitle = '';
 	};
 
+	/**
+	 * Delete a note
+	 * @memberof AccountNotesCtrl
+	 * @function deleteNote
+	 * @param  {Object} note Note to delete
+	 */
 	$scope.deleteNote = function (note) {
 		if (note) {
 			var r = $window.confirm("Please confirm deletion of note " + note.title);
@@ -184,6 +249,11 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		}
 	};
 
+	/**
+	 * Switch between edit and view mode
+	 * @memberof AccountNotesCtrl
+	 * @function changeEditMode
+	 */
 	$scope.changeEditMode = function () {
 		$scope.editMode = !$scope.editMode;
 		if (!$scope.editMode) {
@@ -198,6 +268,12 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 
 	};
 
+	/**
+	 * Update note content
+	 * @memberof AccountNotesCtrl
+	 * @function save
+	 * @param  {Object} note note to update
+	 */
 	$scope.save = function (note) {
 		if ($scope.editMode) {
 			$scope.md = $("#my-edit-area").val();
@@ -212,12 +288,23 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		}
 	};
 
+	/**
+	 * Open note in Evernote
+	 * @memberof AccountNotesCtrl
+	 * @function open
+	 * @param  {Object} note Note to open
+	 */
 	$scope.open = function (note) {
 		if (evernoteSave) {
 			evernote.openNote(note);
 		}
 	};
 
+	/**
+	 * Syncronize notes between Evernote and local notes
+	 * @memberof AccountNotesCtrl
+	 * @function syncNotes
+	 */
 	$scope.syncNotes = function () {
 
 		for (var i in evernoteList) {

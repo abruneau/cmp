@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>JSDoc: AccountFilesCtrl</title>
+    <title>JSDoc: AccountNotesCtrl</title>
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
     <link href="css/site.css" type="text/css" rel="stylesheet">
   </head>
@@ -147,8 +147,8 @@
         Angular controller
       </h3>
       <h1 class="title">
-        AccountFilesCtrl
-        <a class="name-link signature-attributes" href="source/cmpApp.AccountFilesCtrl.html#line3">source</a>
+        AccountNotesCtrl
+        <a class="name-link signature-attributes" href="source/cmpApp.AccountNotesCtrl.html#line3">source</a>
       </h1>
       <div id="main" class="big-container">
         <!-- source code html -->
@@ -161,7 +161,7 @@
   <div class="clearfix"></div>
   <div class="description">
     <h4>Description</h4>
-    <h1>AccountFilesCtrl</h1><p>Controller of the cmpApp</p>
+    <h1>AccountNotesCtrl</h1><p>Controller of the cmpApp</p>
   </div>
   <div class="details"></div>
   <div>
@@ -186,6 +186,29 @@
           </td>
         </tr><tr>
           <td class="name" nowrap="">
+            <a id="$sce"></a>
+            $sce
+          </td>
+          <td class="type"><span class="param-type">
+            <a href="service.html">service</a>
+          </span></td>
+          <td class="description last">
+          </td>
+        </tr><tr>
+          <td class="name" nowrap="">
+            <a id="$windows"></a>
+            $windows
+          </td>
+          <td class="type"><span class="param-type">
+            <a href="service.html">service</a>
+          </span></td>
+          <td class="description last">
+            <span>
+              <p>windows scope</p>
+            </span>
+          </td>
+        </tr><tr>
+          <td class="name" nowrap="">
             <a id="$routeParams"></a>
             $routeParams
           </td>
@@ -195,6 +218,32 @@
           <td class="description last">
             <span>
               <p>route scope</p>
+            </span>
+          </td>
+        </tr><tr>
+          <td class="name" nowrap="">
+            <a id="evernote"></a>
+            evernote
+          </td>
+          <td class="type"><span class="param-type">
+            <a href="service.html">service</a>
+          </span></td>
+          <td class="description last">
+            <span>
+              <p>evernote service</p>
+            </span>
+          </td>
+        </tr><tr>
+          <td class="name" nowrap="">
+            <a id="Notes"></a>
+            Notes
+          </td>
+          <td class="type"><span class="param-type">
+            <a href="service.html">service</a>
+          </span></td>
+          <td class="description last">
+            <span>
+              <p>Notes service</p>
             </span>
           </td>
         </tr><tr>
@@ -212,15 +261,28 @@
           </td>
         </tr><tr>
           <td class="name" nowrap="">
-            <a id="Fs"></a>
-            Fs
+            <a id="Settings"></a>
+            Settings
           </td>
           <td class="type"><span class="param-type">
             <a href="service.html">service</a>
           </span></td>
           <td class="description last">
             <span>
-              <p>Fs service</p>
+              <p>Settings service</p>
+            </span>
+          </td>
+        </tr><tr>
+          <td class="name" nowrap="">
+            <a id="Accounts"></a>
+            Accounts
+          </td>
+          <td class="type"><span class="param-type">
+            <a href="service.html">service</a>
+          </span></td>
+          <td class="description last">
+            <span>
+              <p>Accounts service</p>
             </span>
           </td>
         </tr>
@@ -232,128 +294,62 @@
   <h3 class="subsection-title">Methods</h3>
   <dl>
     <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line135" class="name-link" id="cd">
+      <a href="source/cmpApp.AccountNotesCtrl.html#line252" class="name-link" id="changeEditMode">
         <h4 class="name">
-          cd
-          <span class="signature">(path)</span>
+          changeEditMode
         </h4>
       </a>
     </dt>
     <dd>
       <div class="description">
         <span>
-          <p>Change the current directory</p>
+          <p>Switch between edit and view mode</p>
         </span>
-      </div>
-      <div>
-        <h4>Parameters</h4>
-        <table class="params">
-          <thead>
-            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="name">path</td>
-              <td class="type"><span class="param-type">
-                String
-              </span></td>
-              <td class="description last">
-                <span>
-                  <p>Target path</p>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </dd>
   </dl><dl>
     <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line62" class="name-link" id="fileIcon">
+      <a href="source/cmpApp.AccountNotesCtrl.html#line212" class="name-link" id="createNote">
         <h4 class="name">
-          fileIcon
-          <span class="signature">(file)</span>
+          createNote
         </h4>
       </a>
     </dt>
     <dd>
       <div class="description">
         <span>
-          <p>Return corresponding icon for a file type</p>
+          <p>Create a new note</p>
         </span>
-      </div>
-      <div>
-        <h4>Parameters</h4>
-        <table class="params">
-          <thead>
-            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="name">file</td>
-              <td class="type"><span class="param-type">
-                String
-              </span></td>
-              <td class="description last">
-                <span>
-                  <p>file name</p>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </dd>
   </dl><dl>
     <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line123" class="name-link" id="mkdir">
+      <a href="source/cmpApp.AccountNotesCtrl.html#line203" class="name-link" id="createNotebook">
         <h4 class="name">
-          mkdir
-          <span class="signature">(name)</span>
+          createNotebook
         </h4>
       </a>
     </dt>
     <dd>
       <div class="description">
         <span>
-          <p>Create a new directory in the current path</p>
+          <p>Create a Notebook in Evernote</p>
         </span>
-      </div>
-      <div>
-        <h4>Parameters</h4>
-        <table class="params">
-          <thead>
-            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="name">name</td>
-              <td class="type"><span class="param-type">
-                String
-              </span></td>
-              <td class="description last">
-                <span>
-                  <p>Name of the new folders</p>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </dd>
   </dl><dl>
     <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line112" class="name-link" id="openApplication">
+      <a href="source/cmpApp.AccountNotesCtrl.html#line229" class="name-link" id="deleteNote">
         <h4 class="name">
-          openApplication
-          <span class="signature">(file)</span>
+          deleteNote
+          <span class="signature">(note)</span>
         </h4>
       </a>
     </dt>
     <dd>
       <div class="description">
         <span>
-          <p>Open file or folder with default application</p>
+          <p>Delete a note</p>
         </span>
       </div>
       <div>
@@ -364,51 +360,13 @@
           </thead>
           <tbody>
             <tr>
-              <td class="name">file</td>
-              <td class="type"><span class="param-type">
-                object
-              </span></td>
-              <td class="description last">
-                <span>
-                  <p>the file object</p>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </dd>
-  </dl><dl>
-    <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line95" class="name-link" id="openFile">
-        <h4 class="name">
-          openFile
-          <span class="signature">(file)</span>
-        </h4>
-      </a>
-    </dt>
-    <dd>
-      <div class="description">
-        <span>
-          <p>Triger function updateList if file is a directory
-Open file with default application else</p>
-        </span>
-      </div>
-      <div>
-        <h4>Parameters</h4>
-        <table class="params">
-          <thead>
-            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="name">file</td>
+              <td class="name">note</td>
               <td class="type"><span class="param-type">
                 Object
               </span></td>
               <td class="description last">
                 <span>
-                  <p>the file object</p>
+                  <p>Note to delete</p>
                 </span>
               </td>
             </tr>
@@ -418,18 +376,17 @@ Open file with default application else</p>
     </dd>
   </dl><dl>
     <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line20" class="name-link" id="updateList">
+      <a href="source/cmpApp.AccountNotesCtrl.html#line173" class="name-link" id="formatDate">
         <h4 class="name">
-          updateList
-          <span class="signature">(path)</span>
+          formatDate
+          <span class="signature">(date)</span>
         </h4>
       </a>
     </dt>
     <dd>
       <div class="description">
         <span>
-          <p>Update list of files and folders for a given path
-Equivalent of a ls</p>
+          <p>Format dates to readable dates</p>
         </span>
       </div>
       <div>
@@ -440,13 +397,62 @@ Equivalent of a ls</p>
           </thead>
           <tbody>
             <tr>
-              <td class="name">path</td>
+              <td class="name">date</td>
               <td class="type"><span class="param-type">
                 String
               </span></td>
               <td class="description last">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line115" class="name-link" id="init">
+        <h4 class="name">
+          init
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Initialize note environnement</p>
+        </span>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line184" class="name-link" id="loadNote">
+        <h4 class="name">
+          loadNote
+          <span class="signature">(note)</span>
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Load selected note</p>
+        </span>
+      </div>
+      <div>
+        <h4>Parameters</h4>
+        <table class="params">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">note</td>
+              <td class="type"><span class="param-type">
+                Object
+              </span></td>
+              <td class="description last">
                 <span>
-                  <p>full path of the folders</p>
+                  <p>Note to load</p>
                 </span>
               </td>
             </tr>
@@ -456,7 +462,126 @@ Equivalent of a ls</p>
     </dd>
   </dl><dl>
     <dt>
-      <a href="source/cmpApp.AccountFilesCtrl.html#line46" class="name-link" id="updateLocalInfo">
+      <a href="source/cmpApp.AccountNotesCtrl.html#line291" class="name-link" id="open">
+        <h4 class="name">
+          open
+          <span class="signature">(note)</span>
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Open note in Evernote</p>
+        </span>
+      </div>
+      <div>
+        <h4>Parameters</h4>
+        <table class="params">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">note</td>
+              <td class="type"><span class="param-type">
+                Object
+              </span></td>
+              <td class="description last">
+                <span>
+                  <p>Note to open</p>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line271" class="name-link" id="save">
+        <h4 class="name">
+          save
+          <span class="signature">(note)</span>
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Update note content</p>
+        </span>
+      </div>
+      <div>
+        <h4>Parameters</h4>
+        <table class="params">
+          <thead>
+            <tr><th>Name</th><th>Type</th><th class="last">Description</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="name">note</td>
+              <td class="type"><span class="param-type">
+                Object
+              </span></td>
+              <td class="description last">
+                <span>
+                  <p>note to update</p>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line303" class="name-link" id="syncNotes">
+        <h4 class="name">
+          syncNotes
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Syncronize notes between Evernote and local notes</p>
+        </span>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line83" class="name-link" id="testSync">
+        <h4 class="name">
+          testSync
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Test syncronisation between Evernote and local notes</p>
+        </span>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line94" class="name-link" id="updateEvernote">
+        <h4 class="name">
+          updateEvernote
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Update an Evernote note</p>
+        </span>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line156" class="name-link" id="updateLocalInfo">
         <h4 class="name">
           updateLocalInfo
         </h4>
@@ -465,8 +590,22 @@ Equivalent of a ls</p>
     <dd>
       <div class="description">
         <span>
-          <p>Update $scope.localInfo on changes
-and triger updateList function</p>
+          <p>Observer Callback for local infos</p>
+        </span>
+      </div>
+    </dd>
+  </dl><dl>
+    <dt>
+      <a href="source/cmpApp.AccountNotesCtrl.html#line144" class="name-link" id="updateSettings">
+        <h4 class="name">
+          updateSettings
+        </h4>
+      </a>
+    </dt>
+    <dd>
+      <div class="description">
+        <span>
+          <p>Observer Callback for Settings</p>
         </span>
       </div>
     </dd>

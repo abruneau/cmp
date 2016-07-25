@@ -6,7 +6,7 @@
  * @name AccountFilesCtrl
  * @param $scope {service} controller scope
  * @param $routeParams {service} route scope
- * @param localAccount {service} laocal infos
+ * @param localAccount {service} local infos
  * @param Fs {service} Fs service
  * @description
  * # AccountFilesCtrl

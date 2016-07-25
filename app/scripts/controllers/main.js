@@ -1,8 +1,11 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cmpApp.controller:MainCtrl
+ * @memberof cmpApp
+ * @ngdoc controller
+ * @name MainCtrl
+ * @param $scope {service} controller scope
+ * @param Todos {service} Todos service
  * @description
  * # MainCtrl
  * Controller of the cmpApp

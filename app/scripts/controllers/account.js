@@ -1,10 +1,17 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name cmpApp.controller:AccountsCtrl
+ * @memberof cmpApp
+ * @ngdoc controller
+ * @name AccountCtrl
+ * @param $scope {service} controller scope
+ * @param $routeParams {service} route scope
+ * @param $timeout {service} angular timeout
+ * @param Accounts {service} Accounts service
+ * @param salesForce {service} salesForce service
+ * @param localAccount {service} localAccount service
  * @description
- * # AccountsCtrl
+ * # AccountCtrl
  * Controller of the cmpApp
  */
 angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParams, $timeout, Accounts, salesForce, localAccount) {
@@ -13,12 +20,22 @@ angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParam
 	var dialog = remote.dialog; // Load the dialogs component of the OS
 	var accountId = $routeParams.id;
 
+	/**
+	 * Observer Callback for Accounts service
+	 * @memberof AccountCtrl
+	 * @function updateAccounts
+	 */
 	var updateAccounts = function () {
 		$scope.accountList = Accounts.list;
 		$scope.account = Accounts.selected;
 		$scope.opportunities = Accounts.opportunities;
 	};
 
+	/**
+	 * Observer Callback for local infos
+	 * @memberof AccountCtrl
+	 * @function updateLocalInfo
+	 */
 	var updateLocalInfo = function () {
 		$scope.localInfo = localAccount.selected;
 	};
@@ -37,10 +54,20 @@ angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParam
 	$scope.account = Accounts.selected;
 	$scope.opportunities = Accounts.opportunities;
 
+	/**
+	 * Update opportunities for an account
+	 * @memberof AccountCtrl
+	 * @function updateOpportunities
+	 */
 	$scope.updateOpportunities = function () {
 		salesForce.loadOpportunities($scope.account.Id);
 	};
 
+	/**
+	 * Open Dialog to select local directory for the account
+	 * @memberof AccountCtrl
+	 * @function selectDirectory
+	 */
 	$scope.selectDirectory = function () {
 		dialog.showOpenDialog({
 			properties: ['openDirectory']
@@ -51,6 +78,11 @@ angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParam
 		});
 	};
 
+	/**
+	 * Update local infos
+	 * @memberof AccountCtrl
+	 * @function updateLocalInfo
+	 */
 	$scope.updateLocalInfo = function () {
 
 		if ($scope.localInfo._id) {

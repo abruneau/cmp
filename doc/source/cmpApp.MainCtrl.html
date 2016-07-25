@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <base href="../">
-    <title>JSDoc: source : navigation.js</title>
+    <title>JSDoc: source : main.js</title>
     <link href="css/prettify-tomorrow.css" type="text/css" rel="stylesheet">
     <link href="css/site.css" type="text/css" rel="stylesheet">
   </head>
@@ -145,92 +145,53 @@
     </nav>
     <div id="content" class="page-wrap">
       <h1 class="title">
-        source : navigation.js
+        source : main.js
       </h1>
       <div id="main" class="big-container">
         <!-- source code html -->
         <article>
           <pre class="prettyprint source linenums"><code>'use strict';
 /**
- * @ngdoc function
- * @name cmpApp.controller:NavigationCtrl
+ * @memberof cmpApp
+ * @ngdoc controller
+ * @name MainCtrl
+ * @param $scope {service} controller scope
+ * @param Todos {service} Todos service
  * @description
- * # NavigationCtrl
+ * # MainCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $scope, Accounts, localAccount) {
-	/* global alasql */
-	/* global $ */
-	function mergeData() {
-		if ($scope.accountList && $scope.localInfoList) {
-			var res = alasql("SELECT sf.*, lo.`group` FROM ? AS sf LEFT JOIN ? AS lo ON sf.Id = lo.accountId", [$scope.accountList, $scope.localInfoList]);
-			$scope.list = res;
-		}
-	}
-	var updateSf = function () {
-		$scope.identity = salesForce.identity;
-	};
-	var updateAccounts = function () {
-		$scope.accountList = Accounts.list;
-		mergeData();
-	};
-	var updateLocalInfo = function () {
-		$scope.localInfoList = localAccount.list;
-		mergeData();
-	};
-	var setContentHeight = function () {
-		// reset height
-		$('.right_col').css('min-height', $(window).height());
-		var bodyHeight = $('body').outerHeight(),
-			footerHeight = $('body').hasClass('footer_fixed') ? 0 : $('footer').height(),
-			leftColHeight = $('.left_col').eq(1).height() + $('.sidebar-footer').height(),
-			contentHeight = bodyHeight &lt; leftColHeight ? leftColHeight : bodyHeight;
-		// normalize content
-		contentHeight -= $('.nav_menu').height() + footerHeight;
-		$('.right_col').css('min-height', contentHeight);
-	};
-	$scope.slide = function ($event) {
-		var $li = $($event.currentTarget).parent();
-		if ($li.is('.active')) {
-			$li.removeClass('active active-sm');
-			$('ul:first', $li).slideUp(function () {
-				setContentHeight();
-			});
-		} else {
-			// prevent closing menu if we are on child menu
-			if (!$li.parent().is('.child_menu')) {
-				$('#sidebar-menu li').removeClass('active active-sm');
-				$('#sidebar-menu li ul').slideUp();
+angular.module('cmpApp').controller('MainCtrl', function ($scope, Todos) {
+	/*global moment */
+	function filterTodos(todos) {
+		var out = [];
+		for (var i in todos) {
+			var todo = todos[i];
+			if (moment(todo.dueDate).isSameOrBefore(moment(), 'day')) {
+				out.push(todo);
 			}
-			$li.addClass('active');
-			$('ul:first', $li).slideDown(function () {
-				setContentHeight();
-			});
+		}
+		return out;
+	}
+	var updateTodos = function () {
+		$scope.$apply(function () {
+			$scope.todos = filterTodos(Todos.list);
+		});
+	};
+	$scope.todos = [];
+	$scope.isLate = function (todo) {
+		if (moment(todo.dueDate).isBefore(moment(), 'day')) {
+			return {'background-color':'#f2dede'};
 		}
 	};
-	$scope.toggle = function () {
-		var BODY = $('body');
-		var SIDEBAR_MENU = $('#sidebar-menu');
-		if (BODY.hasClass('nav-md')) {
-            SIDEBAR_MENU.find('li.active ul').hide();
-            SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-        } else {
-            SIDEBAR_MENU.find('li.active-sm ul').show();
-            SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-        }
-        BODY.toggleClass('nav-md nav-sm');
-        setContentHeight();
+	$scope.toggleCompleted = function (todo, completed) {
+		if (angular.isDefined(completed)) {
+			todo.completed = completed;
+		}
+		Todos.update(todo);
 	};
-	$scope.homeIsCollapsed = false;
-	$scope.identity = salesForce.identity;
-	$scope.accountList = Accounts.list;
-	$scope.localInfoList = localAccount.list;
-	$scope.list = null;
-	salesForce.registerObserverCallback(updateSf);
-	Accounts.updateList();
-	localAccount.updateList();
-	Accounts.registerObserverCallback(updateAccounts);
-	localAccount.registerObserverCallback(updateLocalInfo);
+	Todos.getAll();
+	Todos.registerObserverCallback(updateTodos);
 });
 </code></pre>
         </article>

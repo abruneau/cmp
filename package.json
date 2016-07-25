@@ -68,7 +68,6 @@
     "start": "electron main.js"
   },
   "dependencies": {
-    "alasql": "^0.2.7",
     "cheerio": "^0.20.0",
     "deasync": "^0.1.7",
     "jsforce": "^1.6.5",

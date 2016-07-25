@@ -9,13 +9,24 @@
  */
 angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $scope, Accounts, localAccount) {
 
-	/* global alasql */
 	/* global $ */
 
 	function mergeData() {
 		if ($scope.accountList && $scope.localInfoList) {
-			var res = alasql("SELECT sf.*, lo.`group` FROM ? AS sf LEFT JOIN ? AS lo ON sf.Id = lo.accountId", [$scope.accountList, $scope.localInfoList]);
-			$scope.list = res;
+			var result = [];
+			for (var i in $scope.accountList) {
+				var out  = $scope.accountList[i];
+				var lil = $scope.localInfoList.filter(function (obj) {
+					return obj.accountId ===  $scope.accountList[i].Id;
+				})[0];
+
+				if (lil) {
+					out.group = lil.group;
+				}
+				result.push(out);
+			}
+
+			$scope.list = result;
 		}
 	}
 

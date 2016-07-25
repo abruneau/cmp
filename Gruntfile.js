@@ -466,12 +466,24 @@ module.exports = function (grunt) {
 			}
 		},
 
-
 		// Test settings
 		karma: {
 			unit: {
 				configFile: 'test/karma.conf.js',
 				singleRun: true
+			}
+		},
+
+		electron: {
+			macosBuild: {
+				options: {
+					name: 'cmp',
+					dir: 'dist',
+					out: 'exec',
+					version: '1.2.2',
+					platform: 'darwin',
+					arch: 'x64'
+				}
 			}
 		}
 	});
@@ -522,7 +534,8 @@ module.exports = function (grunt) {
 		'filerev',
 		'usemin',
 		'htmlmin',
-		'install-dependencies'
+		'install-dependencies',
+		'electron'
 	]);
 
 	grunt.registerTask('default', [

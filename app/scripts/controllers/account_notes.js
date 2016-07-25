@@ -30,7 +30,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	var opts = {
 		container: 'epiceditor',
 		textarea: 'my-edit-area',
-		basePath: '../bower_components/EpicEditor/epiceditor/',
+		basePath: 'themes',
 		clientSideStorage: false,
 		localStorageName: 'epiceditor',
 		useNativeFullscreen: true,
@@ -41,9 +41,9 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 			autoSave: 100
 		},
 		theme: {
-			base: '/themes/base/epiceditor.css',
-			preview: '/themes/preview/github.css',
-			editor: '/themes/editor/epic-dark.css'
+			base: '/base/epiceditor.css',
+			preview: '/preview/github.css',
+			editor: '/editor/epic-dark.css'
 		},
 		button: {
 			preview: true,

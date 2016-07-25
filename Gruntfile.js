@@ -13,6 +13,7 @@ module.exports = function (grunt) {
 	require('time-grunt')(grunt);
 	require('load-grunt-tasks')(grunt);
 	grunt.loadNpmTasks('grunt-install-dependencies');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
 	// Automatically load required Grunt tasks
 	require('jit-grunt')(grunt, {
@@ -412,6 +413,11 @@ module.exports = function (grunt) {
 					cwd: '',
 					src: 'package.json',
 					dest: '<%= yeoman.dist %>'
+				}, {
+					expand: true,
+					cwd: 'bower_components/EpicEditor/epiceditor/',
+					src: ['themes/base/epiceditor.css', 'themes/preview/github.css', 'themes/editor/epic-dark.css'],
+					dest: '<%= yeoman.dist %>'
 				}]
 			},
 			styles: {
@@ -419,6 +425,14 @@ module.exports = function (grunt) {
 				cwd: '<%= yeoman.app %>/styles',
 				dest: '.tmp/styles/',
 				src: '{,*/}*.css'
+			},
+			dev: {
+				files: [{
+					expand: true,
+					cwd: 'bower_components/EpicEditor/epiceditor/',
+					src: ['themes/base/epiceditor.css', 'themes/preview/github.css', 'themes/editor/epic-dark.css'],
+					dest: '<%= yeoman.app %>'
+				}]
 			}
 		},
 
@@ -473,6 +487,7 @@ module.exports = function (grunt) {
 			'wiredep:dev',
 			'concurrent:server',
 			'postcss:server',
+			'copy:dev',
 			'shell'
 		]);
 	});

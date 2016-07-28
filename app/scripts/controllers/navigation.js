@@ -20,8 +20,10 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 					return obj.accountId ===  $scope.accountList[i].Id;
 				})[0];
 
-				if (lil) {
+				if (lil && lil.group) {
 					out.group = lil.group;
+				} else {
+					out.group = "Unnamed";
 				}
 				result.push(out);
 			}

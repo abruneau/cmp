@@ -480,7 +480,7 @@ module.exports = function (grunt) {
 					name: 'cmp',
 					dir: 'dist',
 					out: 'exec',
-					version: '1.3.1',
+					version: '1.2.8',
 					platform: 'darwin',
 					arch: 'x64',
 					overwrite: 'true'
@@ -536,7 +536,8 @@ module.exports = function (grunt) {
 		'usemin',
 		'htmlmin',
 		'install-dependencies',
-		'electron'
+		'electron',
+		'wiredep'
 	]);
 
 	grunt.registerTask('default', [

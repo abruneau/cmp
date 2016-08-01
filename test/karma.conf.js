@@ -42,10 +42,6 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
       'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js',
       'bower_components/simpleWeather/jquery.simpleWeather.js',
-      'bower_components/js-xls/dist/xls.js',
-      'bower_components/js-xlsx/dist/xlsx.js',
-      'bower_components/es6-promise/promise.js',
-      'bower_components/alasql/dist/alasql.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

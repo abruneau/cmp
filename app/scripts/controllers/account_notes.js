@@ -7,7 +7,7 @@
  * # AccountNotesCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Notes, localAccount, Settings, Accounts, $scope, $sce, $window, $routeParams) {
+angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Notes, localAccount, Settings, Accounts, $scope, $sce, $window, $routeParams, $interval) {
 
 	/*global moment */
 	/*global $ */
@@ -68,6 +68,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	var evernoteSave = false;
 	var notebook = null;
 	var evernoteList = [];
+	var oldMd = null;
 
 	function testSync() {
 		if (evernoteSave && localSave) {
@@ -126,6 +127,13 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		$scope.localInfo = localAccount.selected;
 		init();
 	};
+
+	function autoSaveNote() {
+		//while (autoSave) {
+		$interval($scope.save($scope.note), 5000);
+		// $interval(console.log("Saving"), 5000);
+		//}
+	}
 
 	$scope.notebookExists = true;
 	$scope.editMode = false;
@@ -199,16 +207,23 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	};
 
 	$scope.save = function (note) {
+		oldMd = $scope.md;
+
 		if ($scope.editMode) {
 			$scope.md = $("#my-edit-area").val();
 			var newHtml = MarkdownIt.render($scope.md.toString());
 			$scope.html = $sce.trustAsHtml(newHtml);
 		}
-		if (localSave) {
-			Notes.updateMd(note.path, $scope.md);
-		}
-		if (evernoteSave) {
-			evernote.updateHtml(note, $scope.html);
+		if (!angular.equals(oldMd, $scope.md)) {
+			console.log("Save note");
+			if (localSave) {
+				Notes.updateMd(note.path, $scope.md);
+			}
+			if (evernoteSave) {
+				evernote.updateHtml(note, $scope.html);
+			}
+		} else {
+			console.log("Not Saving");
 		}
 	};
 

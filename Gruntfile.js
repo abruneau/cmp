@@ -480,9 +480,10 @@ module.exports = function (grunt) {
 					name: 'cmp',
 					dir: 'dist',
 					out: 'exec',
-					version: '1.2.2',
+					version: '1.3.1',
 					platform: 'darwin',
-					arch: 'x64'
+					arch: 'x64',
+					overwrite: 'true'
 				}
 			}
 		}

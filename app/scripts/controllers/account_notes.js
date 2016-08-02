@@ -128,13 +128,6 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 		init();
 	};
 
-	function autoSaveNote() {
-		//while (autoSave) {
-		$interval($scope.save($scope.note), 5000);
-		// $interval(console.log("Saving"), 5000);
-		//}
-	}
-
 	$scope.notebookExists = true;
 	$scope.editMode = false;
 	$scope.note = null;
@@ -215,15 +208,12 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 			$scope.html = $sce.trustAsHtml(newHtml);
 		}
 		if (!angular.equals(oldMd, $scope.md)) {
-			console.log("Save note");
 			if (localSave) {
 				Notes.updateMd(note.path, $scope.md);
 			}
 			if (evernoteSave) {
 				evernote.updateHtml(note, $scope.html);
 			}
-		} else {
-			console.log("Not Saving");
 		}
 	};
 

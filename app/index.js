@@ -67,15 +67,7 @@ app.on('ready', function () {
 			}
 		}, {
 			role: 'togglefullscreen'
-		}, {
-			label: 'Toggle Developer Tools',
-			accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-			click(item, focusedWindow) {
-				if (focusedWindow) {
-					focusedWindow.webContents.toggleDevTools();
-				}
-			}
-		}, ]
+		}]
 	}, {
 		role: 'window',
 		submenu: [{
@@ -88,7 +80,7 @@ app.on('ready', function () {
 		submenu: [{
 			label: 'Learn More',
 			click() {
-				require('electron').shell.openExternal('http://electron.atom.io');
+				require('electron').shell.openExternal('https://github.com/abruneau/cmp');
 			}
 		}, ]
 	}, ];

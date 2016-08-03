@@ -7,15 +7,29 @@
  * # NavigationCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $scope, Accounts, localAccount) {
+angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $scope, Accounts, localAccount, $timeout) {
 
-	/* global alasql */
 	/* global $ */
+	/* global moment */
 
 	function mergeData() {
 		if ($scope.accountList && $scope.localInfoList) {
-			var res = alasql("SELECT sf.*, lo.`group` FROM ? AS sf LEFT JOIN ? AS lo ON sf.Id = lo.accountId", [$scope.accountList, $scope.localInfoList]);
-			$scope.list = res;
+			var result = [];
+			for (var i in $scope.accountList) {
+				var out = $scope.accountList[i];
+				var lil = $scope.localInfoList.filter(function (obj) {
+					return obj.accountId === $scope.accountList[i].Id;
+				})[0];
+
+				if (lil && lil.group) {
+					out.group = lil.group;
+				} else {
+					out.group = "Unnamed";
+				}
+				result.push(out);
+			}
+
+			$scope.list = result;
 		}
 	}
 
@@ -48,6 +62,22 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 		$('.right_col').css('min-height', contentHeight);
 	};
 
+	function TimeCtrl() {
+		var tickInterval = 1000; //ms
+
+		var tick = function () {
+			$scope.$apply(function () {
+				$scope.clock = moment().format("dddd, MMMM Do YYYY, HH:mm"); // get the current time
+				$timeout(tick, tickInterval); // reset the timer
+			});
+		};
+
+		// Start the timer
+		$timeout(tick, tickInterval);
+	}
+
+	$scope.clock = "loading clock..."; // initialise the time variable
+
 	$scope.slide = function ($event) {
 		var $li = $($event.currentTarget).parent();
 
@@ -76,16 +106,16 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 		var SIDEBAR_MENU = $('#sidebar-menu');
 
 		if (BODY.hasClass('nav-md')) {
-            SIDEBAR_MENU.find('li.active ul').hide();
-            SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-        } else {
-            SIDEBAR_MENU.find('li.active-sm ul').show();
-            SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-        }
+			SIDEBAR_MENU.find('li.active ul').hide();
+			SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+		} else {
+			SIDEBAR_MENU.find('li.active-sm ul').show();
+			SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+		}
 
-        BODY.toggleClass('nav-md nav-sm');
+		BODY.toggleClass('nav-md nav-sm');
 
-        setContentHeight();
+		setContentHeight();
 	};
 
 	$scope.homeIsCollapsed = false;
@@ -99,4 +129,5 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 	localAccount.updateList();
 	Accounts.registerObserverCallback(updateAccounts);
 	localAccount.registerObserverCallback(updateLocalInfo);
+	TimeCtrl();
 });

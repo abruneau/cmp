@@ -17,7 +17,7 @@
  * # AccountNotesCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Notes, localAccount, Settings, Accounts, $scope, $sce, $window, $routeParams) {
+angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Notes, localAccount, Settings, Accounts, $scope, $sce, $window, $routeParams, $interval) {
 
 	/*global moment */
 	/*global $ */
@@ -40,7 +40,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	var opts = {
 		container: 'epiceditor',
 		textarea: 'my-edit-area',
-		basePath: '../bower_components/EpicEditor/epiceditor/',
+		basePath: 'themes',
 		clientSideStorage: false,
 		localStorageName: 'epiceditor',
 		useNativeFullscreen: true,
@@ -51,9 +51,9 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 			autoSave: 100
 		},
 		theme: {
-			base: '/themes/base/epiceditor.css',
-			preview: '/themes/preview/github.css',
-			editor: '/themes/editor/epic-dark.css'
+			base: '/base/epiceditor.css',
+			preview: '/preview/github.css',
+			editor: '/editor/epic-dark.css'
 		},
 		button: {
 			preview: true,
@@ -78,6 +78,7 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	var evernoteSave = false;
 	var notebook = null;
 	var evernoteList = [];
+	var oldMd = null;
 
 
 	/**
@@ -275,16 +276,20 @@ angular.module('cmpApp').controller('AccountNotesCtrl', function (evernote, Note
 	 * @param  {Object} note note to update
 	 */
 	$scope.save = function (note) {
+		oldMd = $scope.md;
+
 		if ($scope.editMode) {
 			$scope.md = $("#my-edit-area").val();
 			var newHtml = MarkdownIt.render($scope.md.toString());
 			$scope.html = $sce.trustAsHtml(newHtml);
 		}
-		if (localSave) {
-			Notes.updateMd(note.path, $scope.md);
-		}
-		if (evernoteSave) {
-			evernote.updateHtml(note, $scope.html);
+		if (!angular.equals(oldMd, $scope.md)) {
+			if (localSave) {
+				Notes.updateMd(note.path, $scope.md);
+			}
+			if (evernoteSave) {
+				evernote.updateHtml(note, $scope.html);
+			}
 		}
 	};
 

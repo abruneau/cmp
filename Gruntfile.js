@@ -511,6 +511,7 @@ module.exports = function (grunt) {
 		}
 
 		grunt.task.run([
+			'jsdoc',
 			'clean:server',
 			'wiredep:dev',
 			'concurrent:server',

@@ -22,6 +22,8 @@ module.exports = function (grunt) {
 		cdnify: 'grunt-google-cdn'
 	});
 
+	grunt.loadNpmTasks('grunt-jsdoc');
+
 	// Configurable paths for the application
 	var appConfig = {
 		app: require('./bower.json').appPath || 'app',
@@ -67,6 +69,19 @@ module.exports = function (grunt) {
 					'.tmp/styles/{,*/}*.css',
 					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
 				]
+			}
+		},
+
+		jsdoc: {
+			dist: {
+				src: ["app/scripts/**/*.js"],
+				options: {
+					destination: 'doc',
+					configure: 'node_modules/angular-jsdoc/common/conf.json',
+					template: 'node_modules/angular-jsdoc/angular-template',
+					tutorial: 'tutorials',
+					readme: './README.md'
+				}
 			}
 		},
 
@@ -496,6 +511,7 @@ module.exports = function (grunt) {
 		}
 
 		grunt.task.run([
+			'jsdoc',
 			'clean:server',
 			'wiredep:dev',
 			'concurrent:server',

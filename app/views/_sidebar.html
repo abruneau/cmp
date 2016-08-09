@@ -8,7 +8,7 @@
 					Home
 					<span class="fa fa-chevron-down"></span>
 				</a>
-				<ul class="nav child_menu">
+				<ul class="nav child_menu cssSlideUp hide">
 					<li>
 						<a href="#/">Dashboard</a>
 					</li>
@@ -17,19 +17,19 @@
 					</li>
 				</ul>
 			</li>
-			<li>
+			<li class="accounts">
 				<a ng-click="slide($event)">
 					<i class="fa fa-briefcase"></i>
 					Accounts
 					<span class="fa fa-chevron-down"></span>
 				</a>
-				<ul class="nav child_menu">
+				<ul class="nav child_menu cssSlideUp hide">
 					<li>
 						<a href="#/account_form"><i class="fa fa-plus-circle"></i>Add Account</a>
 					</li>
 					<li ng-repeat="(key, value) in list | orderBy:'-group' : true | groupBy: 'group' ">
 						<a ng-click="slide($event)">{{key}}<span class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">
+						<ul class="nav child_menu cssSlideUp hide">
 							<li ng-repeat="account in value | orderBy:'-Name' : true">
 								<a href="#/account/{{account.Id}}">{{account.Name}}</a>
 							</li>

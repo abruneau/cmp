@@ -7,9 +7,8 @@
  * # NavigationCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $scope, Accounts, localAccount, $timeout) {
+angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $scope, $window, Accounts, localAccount, $timeout) {
 
-	/* global $ */
 	/* global moment */
 
 	function mergeData() {
@@ -47,21 +46,6 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 		mergeData();
 	};
 
-	var setContentHeight = function () {
-		// reset height
-		$('.right_col').css('min-height', $(window).height());
-
-		var bodyHeight = $('body').outerHeight(),
-			footerHeight = $('body').hasClass('footer_fixed') ? 0 : $('footer').height(),
-			leftColHeight = $('.left_col').eq(1).height() + $('.sidebar-footer').height(),
-			contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
-		// normalize content
-		contentHeight -= $('.nav_menu').height() + footerHeight;
-
-		$('.right_col').css('min-height', contentHeight);
-	};
-
 	function TimeCtrl() {
 		var tickInterval = 1000; //ms
 
@@ -79,43 +63,34 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 	$scope.clock = "loading clock..."; // initialise the time variable
 
 	$scope.slide = function ($event) {
-		var $li = $($event.currentTarget).parent();
+		var $li = angular.element($event.currentTarget).parent();
 
-		if ($li.is('.active')) {
+		if ($li.hasClass('active')) {
+			angular.element($li.find('ul')[0]).addClass('hide');
 			$li.removeClass('active active-sm');
-			$('ul:first', $li).slideUp(function () {
-				setContentHeight();
-			});
 		} else {
-			// prevent closing menu if we are on child menu
-			if (!$li.parent().is('.child_menu')) {
-				$('#sidebar-menu li').removeClass('active active-sm');
-				$('#sidebar-menu li ul').slideUp();
-			}
+			$li.parent().find('li').removeClass('active active-sm');
+			$li.parent().find('ul').addClass('hide');
 
 			$li.addClass('active');
-
-			$('ul:first', $li).slideDown(function () {
-				setContentHeight();
-			});
+			angular.element($li.find('ul')[0]).removeClass('hide');
 		}
 	};
 
 	$scope.toggle = function () {
-		var BODY = $('body');
-		var SIDEBAR_MENU = $('#sidebar-menu');
+		var BODY = angular.element(document.querySelector('body'));
+		var SIDEBAR_MENU = angular.element(document.querySelector('#sidebar-menu'));
 
 		if (BODY.hasClass('nav-md')) {
-			SIDEBAR_MENU.find('li.active ul').hide();
-			SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+			angular.element(SIDEBAR_MENU[0].querySelector('li.active ul')).addClass('display-hide');
+			angular.element(SIDEBAR_MENU[0].querySelector('li.active')).addClass('active-sm').removeClass('active');
 		} else {
-			SIDEBAR_MENU.find('li.active-sm ul').show();
-			SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+			angular.element(SIDEBAR_MENU[0].querySelector('li.active-sm ul')).removeClass('display-hide');
+			angular.element(SIDEBAR_MENU[0].querySelector('li.active-sm')).addClass('active').removeClass('active-sm');
 		}
 
 		BODY.toggleClass('nav-md nav-sm');
 
-		setContentHeight();
 	};
 
 	$scope.homeIsCollapsed = false;
@@ -130,4 +105,5 @@ angular.module('cmpApp').controller('NavigationCtrl', function (salesForce, $sco
 	Accounts.registerObserverCallback(updateAccounts);
 	localAccount.registerObserverCallback(updateLocalInfo);
 	TimeCtrl();
+
 });

@@ -8,17 +8,17 @@
 			</div>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li class="">
-					<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				<li uib-dropdown>
+					<a uib-dropdown-toggle class="user-profile" aria-expanded="false">
 						<img src="images/yeoman.png" alt="">{{identity.display_name}}
 						<span class=" fa fa-angle-down"></span>
 					</a>
-					<ul class="dropdown-menu dropdown-usermenu pull-right">
+					<ul class="dropdown-usermenu pull-right" uib-dropdown-menu role="menu" aria-labelledby="simple-dropdown">
 						<li>
-							<a href="#/profile">
-								Profile</a>
+							<a href="#/profile">Profile</a>
 						</li>
 					</ul>
+
 				</li>
 				<li class="user-profile" style="line-height: 32px; padding: 15px 15px 9px;">
 					{{clock}}

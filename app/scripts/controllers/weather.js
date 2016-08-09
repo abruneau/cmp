@@ -26,17 +26,10 @@ angular.module('cmpApp').controller('WeatherCtrl', function ($scope) {
 				});
 			},
 			error: function (error) {
-				$("#weather").html('<p>' + error + '</p>');
+				$("#weatherError").html('<p>' + error + '</p>');
 			}
 		});
 	}
-
-	/* Where in the world are you? */
-	$('.js-geolocation').on('click', function () {
-		navigator.geolocation.getCurrentPosition(function (position) {
-			loadWeather(position.coords.latitude + ',' + position.coords.longitude); //load weather using your lat/lng coordinates
-		});
-	});
 
 	$(document).ready(function () {
 		loadWeather('Paris', ''); //@params location, woeid

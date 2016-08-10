@@ -5,7 +5,7 @@ version 0.15.1.
 
 ## Download
 
-You can download a package version for mac here : [cmp.ap](https://github.com/abruneau/cmp/releases/download/latest/cmp.app.zip)
+You can download a package version for mac here : [cmp.app](https://github.com/abruneau/cmp/releases/download/0.2.1/cmp.app.zip)
 
 ## Build & development
 

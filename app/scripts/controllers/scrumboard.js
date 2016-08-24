@@ -27,16 +27,16 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 
 	function moveCard(id, position) {
 		var card = $("#" + id);
-		card.animate({
-			left: position.left + "px",
-			top: position.top + "px"
-		}, 500);
+
+		var l = ( 100 * parseFloat(position.left / parseFloat(card.parent().width())) );
+		var t = ( 100 * parseFloat(position.top / parseFloat(card.parent().height())) );
+
 		var c = Scrumboard.cards.filter(function (obj) {
 			return obj.id === id;
 		})[0];
 
-		c.x = position.left;
-		c.y = position.top;
+		c.x = l;
+		c.y = t;
 
 		Scrumboard.update(c);
 	}
@@ -45,7 +45,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 
 		var stickerContainer = $('#' + cardId + ' .filler');
 
-		if (stickerId === "nosticker") {
+		if (!stickerId || stickerId === "nosticker") {
 			stickerContainer.html("");
 			return;
 		}
@@ -86,7 +86,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 		card.draggable({
 			snap: false,
 			snapTolerance: 5,
-			containment: [0, 0, 2000, 2000],
+			containment: "#board",
 			stack: ".card",
 			start: function () {
 				keyTrap = null;
@@ -146,8 +146,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 		card.css('left', startPosition.left - card.width() * 0.5);
 
 		card.animate({
-			left: x + "px",
-			top: y + "px"
+			left: x + "%",
+			top: y + "%"
 		}, speed);
 
 		card.hover(
@@ -324,7 +324,6 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 		}
 
 		if (Scrumboard.cards) {
-			console.log(Scrumboard.cards);
 			initCards(Scrumboard.cards);
 		}
 	}
@@ -356,8 +355,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 		var rot = Math.random() * 10 - 5; //add a bit of random rotation (+/- 10deg)
 		var id = 'card-' + Math.round(Math.random() * 99999999); //is this big enough to assure uniqueness?
 		var text = 'Double click to edit';
-		var x = 58;
-		var y = $('div.board-outline').height(); // hack - not a great way to get the new card coordinates, but most consistant ATM
+		var x = 5;
+		var y = 100; // hack - not a great way to get the new card coordinates, but most consistant ATM
 		var colour = randomCardColour();
 		drawNewCard(id, text, x, y, rot, colour);
 		var card = {

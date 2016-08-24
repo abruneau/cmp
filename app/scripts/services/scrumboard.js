@@ -2,16 +2,13 @@
 
 /**
  * @ngdoc service
- * @name cmpApp.Tasks
+ * @name Scrumboard
  * @description
- * # Tasks
+ * # Scrumboard
  * Factory in the cmpApp.
  */
-angular.module('cmpApp').factory('Tasks', function (database) {
+angular.module('cmpApp').factory('Scrumboard', function (database) {
 	var self = this;
-
-	var deasync = require('deasync');
-	var syncDatabaseFind = deasync(database.find);
 
 	var observerCallbacks = [];
 
@@ -25,14 +22,7 @@ angular.module('cmpApp').factory('Tasks', function (database) {
 	var columns = {
 		list: [],
 		attributes: {
-			type: 'Tasks-columns'
-		}
-	};
-
-	var task = {
-		list: [],
-		attributes: {
-			type: 'Task'
+			type: 'Scrumboard-columns'
 		}
 	};
 
@@ -47,19 +37,9 @@ angular.module('cmpApp').factory('Tasks', function (database) {
 		});
 	}
 
-	self.syncGetColumns = function () {
-		try {
-			return syncDatabaseFind({
-				"attributes.type": 'Tasks-columns'
-			});
-		} catch (e) {
-			console.log('Error : ' + e);
-		}
-	};
-
 	self.getColumns = function () {
 		database.findOne({
-			"attributes.type": 'Tasks-columns'
+			"attributes.type": 'Scrumboard-columns'
 		}, function (err, doc) {
 			if (doc) {
 				self.columns = doc;
@@ -72,43 +52,43 @@ angular.module('cmpApp').factory('Tasks', function (database) {
 		});
 	};
 
-	self.getTasks = function () {
+	self.getCards = function () {
 		database.find({
-			"attributes.type": 'Task'
+			"attributes.type": 'Scrumboard-card'
 		}, function (err, docs) {
 			if (err) {
 				console.log(err);
 			}
 			if (docs) {
-				self.tasks = docs;
+				self.cards = docs;
 				notifyObservers();
 			}
 		});
 	};
 
-	self.add = function (newTask) {
-		database.insert(newTask, function (err) {
+	self.add = function (newObj) {
+		database.insert(newObj, function (err) {
 			if (err) {
 				console.log(err);
 			} else {
-				self.tasks.push(newTask);
+				self.cards.push(newObj);
 			}
 		});
 	};
 
-	self.update = function (task) {
+	self.update = function (obj) {
 		database.update({
-			_id: task._id
-		}, task, {}, function (err) {
+			_id: obj._id
+		}, obj, {}, function (err) {
 			if (err) {
 				console.log(err);
 			}
 		});
 	};
 
-	self.del = function (task) {
+	self.del = function (obj) {
 		database.remove({
-			_id: task._id
+			_id: obj._id
 		}, {}, function (err) {
 			if (err) {
 				console.log(err);

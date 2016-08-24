@@ -7,7 +7,7 @@
  * # ScrumboardCtrl
  * Controller of the cmpApp
  */
-angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
+angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboard) {
 
 	/* global $ */
 
@@ -17,12 +17,12 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 
 	function onCardChange(id, text) {
 		$("#" + id).children('.content:first').text(text);
-		var card = Tasks.tasks.filter(function (obj) {
+		var card = Scrumboard.cards.filter(function (obj) {
 			return obj.id === id;
 		})[0];
 
 		card.text = text;
-		Tasks.update(card);
+		Scrumboard.update(card);
 	}
 
 	function moveCard(id, position) {
@@ -31,14 +31,14 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 			left: position.left + "px",
 			top: position.top + "px"
 		}, 500);
-		var c = Tasks.tasks.filter(function (obj) {
+		var c = Scrumboard.cards.filter(function (obj) {
 			return obj.id === id;
 		})[0];
 
 		c.x = position.left;
 		c.y = position.top;
 
-		Tasks.update(c);
+		Scrumboard.update(c);
 	}
 
 	function addSticker(cardId, stickerId) {
@@ -64,11 +64,11 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 	}
 
 	function deleteCard(id) {
-		var card = Tasks.tasks.filter(function (obj) {
+		var card = Scrumboard.cards.filter(function (obj) {
 			return obj.id === id;
 		})[0];
 
-		Tasks.del(card);
+		Scrumboard.del(card);
 	}
 
 	function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
@@ -116,7 +116,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 				var stickerId = ui.draggable.attr("id");
 				var cardId = $(this).parent().attr('id');
 
-				var card = Tasks.tasks.filter(function (obj) {
+				var card = Scrumboard.cards.filter(function (obj) {
 					return obj.id === cardId;
 				})[0];
 
@@ -125,7 +125,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 				} else {
 					card.sticker = [stickerId];
 				}
-				Tasks.update(card);
+				Scrumboard.update(card);
 				addSticker(cardId, stickerId);
 
 				//remove hover state to everything on the board to prevent
@@ -212,8 +212,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 
 		var index = parseInt(id.slice(4)) - 1;
 
-		Tasks.columns.list[index] = text;
-		Tasks.update(Tasks.columns);
+		Scrumboard.columns.list[index] = text;
+		Scrumboard.update(Scrumboard.columns);
 	}
 
 	function drawNewColumn(columnName) {
@@ -318,14 +318,14 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 	}
 
 	function init() {
-		if (Tasks.columns.list && Tasks.columns.list.length) {
-			var columnArray = Tasks.columns.list;
+		if (Scrumboard.columns.list && Scrumboard.columns.list.length) {
+			var columnArray = Scrumboard.columns.list;
 			deleteColumns(initColumns, columnArray);
 		}
 
-		if (Tasks.tasks) {
-			console.log(Tasks.tasks);
-			initCards(Tasks.tasks);
+		if (Scrumboard.cards) {
+			console.log(Scrumboard.cards);
+			initCards(Scrumboard.cards);
 		}
 	}
 
@@ -333,15 +333,13 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 	//	scope //
 	////////////
 
-	$scope.cards = [];
-
 	$scope.addColumn = function () {
 		if (totalcolumns >= 8) {
 			return false;
 		}
 		drawNewColumn('New');
-		Tasks.columns.list.push('New');
-		Tasks.update(Tasks.columns);
+		Scrumboard.columns.list.push('New');
+		Scrumboard.update(Scrumboard.columns);
 	};
 
 	$scope.deleteColumn = function () {
@@ -350,8 +348,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 		}
 
 		displayRemoveColumn();
-		Tasks.columns.list.pop();
-		Tasks.update(Tasks.columns);
+		Scrumboard.columns.list.pop();
+		Scrumboard.update(Scrumboard.columns);
 	};
 
 	$scope.addCard = function () {
@@ -374,7 +372,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 			}
 		};
 
-		Tasks.add(card);
+		Scrumboard.add(card);
 	};
 
 	$scope.changeStyle = function () {
@@ -385,8 +383,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Tasks) {
 		}
 	};
 
-	Tasks.getColumns();
-	Tasks.getTasks();
-	Tasks.registerObserverCallback(init);
+	Scrumboard.getColumns();
+	Scrumboard.getCards();
+	Scrumboard.registerObserverCallback(init);
 
 });

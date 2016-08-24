@@ -57,6 +57,11 @@ angular
 				controller: 'TodoCtrl',
 				controllerAs: 'todo'
 			})
+.when('/Scrumboard', {
+  templateUrl: 'views/scrumboard.html',
+  controller: 'ScrumboardCtrl',
+  controllerAs: 'Scrumboard'
+})
 			.otherwise({
 				redirectTo: '/'
 			});

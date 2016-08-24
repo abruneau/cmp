@@ -1,0 +1,37 @@
+<div class='row scrumboard'>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="board-outline">
+			<div id="board">
+				<div id="board"></div>
+				<image id="marker" src='images/marker.png'></image>
+				<image id="eraser" src='images/eraser.png'></image>
+				<table id="board-table" class="board-table">
+					<tr>
+						<td id="icon-col" width='1%'>
+							<image ng-click="addColumn()" id="add-col" class="col-icon" width='20' , height='20' , src='images/icons/iconic/raster/black/plus_alt_32x32.png'></image>
+							<image ng-click="deleteColumn()" id="delete-col" class="col-icon" width='20' , height='20' , src='images/icons/iconic/raster/black/minus_alt_32x32.png'></image>
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+		<div class="buttons">
+			<i id="create-card" ng-click="addCard()" class="fa fa-plus-circle fa-2x bottom-icon"></i>
+			<i id="smallify" ng-click="changeStyle()" class="fa fa-expand fa-2x bottom-icon"></i>
+		</div>
+		<div class="stickers">
+			<div class="sticker" id="sticker-red"></div>
+			<div class="sticker" id="sticker-blue"></div>
+			<div class="sticker" id="sticker-yellow"></div>
+			<div class="sticker" id="sticker-green"></div>
+			<br>
+			<div class="sticker" id="sticker-pink"></div>
+			<div class="sticker" id="sticker-lightblue"></div>
+			<div class="sticker" id="sticker-orange"></div>
+			<div class="sticker" id="sticker-purple"></div>
+			<br>
+			<div class="sticker" id="nosticker"></div>
+		</div>
+	</div>
+</div>

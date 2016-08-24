@@ -368,7 +368,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 			rot,
 			colour,
 			attributes: {
-				type: 'Task'
+				type: 'Scrumboard-card'
 			}
 		};
 

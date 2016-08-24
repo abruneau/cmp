@@ -28,8 +28,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 	function moveCard(id, position) {
 		var card = $("#" + id);
 
-		var l = ( 100 * parseFloat(position.left / parseFloat(card.parent().width())) );
-		var t = ( 100 * parseFloat(position.top / parseFloat(card.parent().height())) );
+		var l = (100 * parseFloat(position.left / parseFloat(card.parent().width())));
+		var t = (100 * parseFloat(position.top / parseFloat(card.parent().height())));
 
 		var c = Scrumboard.cards.filter(function (obj) {
 			return obj.id === id;
@@ -120,11 +120,16 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 					return obj.id === cardId;
 				})[0];
 
-				if (card.sticker) {
-					card.sticker.push(stickerId);
+				if (stickerId === "nosticker") {
+					card.sticker = [];
 				} else {
-					card.sticker = [stickerId];
+					if (card.sticker) {
+						card.sticker.push(stickerId);
+					} else {
+						card.sticker = [stickerId];
+					}
 				}
+
 				Scrumboard.update(card);
 				addSticker(cardId, stickerId);
 
@@ -192,8 +197,9 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 		});
 
 		//add applicable sticker
-    if (sticker !== null){
-		addSticker(id, sticker);}
+		if (sticker !== null) {
+			addSticker(id, sticker);
+		}
 	}
 
 	function randomCardColour() {

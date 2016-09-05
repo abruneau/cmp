@@ -23,8 +23,8 @@ angular.module('cmpApp').factory('evernoteOsa', function () {
 		var cmd = "";
 
 		cmd += 'tell application "Evernote"\n';
-		cmd += '\tactivate';
-		cmd += '\tdelay (2)';
+		cmd += '\tactivate\n';
+		cmd += '\tdelay (2)\n';
 		cmd += '\tnotebook named "' + name + '" exists\n';
 		cmd += 'end tell';
 

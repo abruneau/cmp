@@ -26,19 +26,61 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>Name</th>
-						<th>StageName</th>
-						<th>Amount</th>
-						<th>ForecastCategory</th>
-						<th>ForecastCategoryName</th>
-						<th>Fiscal</th>
+						<th>
+							<a ng-click="sortType = 'CreatedDate'; sortReverse = !sortReverse">
+								Created Date
+								<span ng-show="sortType == 'CreatedDate' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'CreatedDate' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'Name'; sortReverse = !sortReverse">
+								Name
+								<span ng-show="sortType == 'Name' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'Name' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'StageName'; sortReverse = !sortReverse">
+								Stage Name
+								<span ng-show="sortType == 'StageName' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'StageName' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'Amount'; sortReverse = !sortReverse">
+								Amount
+								<span ng-show="sortType == 'Amount' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'Amount' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'ForecastCategory'; sortReverse = !sortReverse">
+								Forecast Category
+								<span ng-show="sortType == 'ForecastCategory' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'ForecastCategory' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'ForecastCategoryName'; sortReverse = !sortReverse">
+								Forecast Category Name
+								<span ng-show="sortType == 'ForecastCategoryName' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'ForecastCategoryName' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'Fiscal'; sortReverse = !sortReverse">
+								Fiscal
+								<span ng-show="sortType == 'Fiscal' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'Fiscal' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
 						<th>Team</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="opport in opportunities" ng-if="opport.IsClosed === showClosedOpport">
-						<th scope="row">{{ $index + 1 }}</th>
+					<tr ng-repeat="opport in opportunities | orderBy:sortType:sortReverse" ng-if="opport.IsClosed === showClosedOpport">
+						<th>{{opport.CreatedDate | date}}</th>
 						<td>{{opport.Name}}</td>
 						<td>{{opport.StageName}}</td>
 						<td>{{opport.Amount}}
@@ -59,4 +101,3 @@
 		</div>
 	</div>
 </div>
-{{opportunities}}

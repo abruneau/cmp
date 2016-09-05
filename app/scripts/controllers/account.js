@@ -53,6 +53,7 @@ angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParam
 	$scope.accountList = Accounts.list;
 	$scope.account = Accounts.selected;
 	$scope.opportunities = Accounts.opportunities;
+	$scope.showClosedOpport = false;
 
 	/**
 	 * Update opportunities for an account

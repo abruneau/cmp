@@ -11,36 +11,95 @@
 		<div class="clearfix"></div>
 	</div>
 	<div class="x_content">
+		<div class="col-md-12">
+			<form class="form-inline">
+				<div class="form-group">
+					<label class="sr-only" for="search">Search</label>
+					<input type="text" class="form-control" id="search" placeholder="Search" ng-model="search">
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="showClosedOpport">
+						Show closed opportunity
+					</label>
+				</div>
+			</form>
+		</div>
+
 		<div class="" role="tabpanel" data-example-id="togglable-tabs">
 			<table class="table table-striped">
-			  <thead>
-				<tr>
-				  <th>#</th>
-				  <th>Name</th>
-				  <th>StageName</th>
-				  <th>Amount</th>
-				  <th>ForecastCategory</th>
-				  <th>ForecastCategoryName</th>
-				  <th>Fiscal</th>
-				  <th>Team</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr ng-repeat="opport in opportunities">
-				  <th scope="row">{{ $index + 1 }}</th>
-				  <td>{{opport.Name}}</td>
-				  <td>{{opport.StageName}}</td>
-				  <td>{{opport.Amount}}</td>
-				  <td>{{opport.ForecastCategory}}</td>
-				  <td>{{opport.ForecastCategoryName}}</td>
-				  <td>{{opport.Fiscal}}</td>
-				  <td>
-					  <div ng-repeat="member in opport.OpportunityTeamMembers.records">
-					  		{{member.Name}} : {{member.TeamMemberRole}}
-					  </div>
-				  </td>
-				</tr>
-			  </tbody>
+				<thead>
+					<tr>
+						<th>
+							<a ng-click="sortType = 'CreatedDate'; sortReverse = !sortReverse">
+								Created Date
+								<span ng-show="sortType == 'CreatedDate' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'CreatedDate' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'Name'; sortReverse = !sortReverse">
+								Name
+								<span ng-show="sortType == 'Name' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'Name' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'StageName'; sortReverse = !sortReverse">
+								Stage Name
+								<span ng-show="sortType == 'StageName' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'StageName' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'Amount'; sortReverse = !sortReverse">
+								Amount
+								<span ng-show="sortType == 'Amount' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'Amount' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'ForecastCategory'; sortReverse = !sortReverse">
+								Forecast Category
+								<span ng-show="sortType == 'ForecastCategory' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'ForecastCategory' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'ForecastCategoryName'; sortReverse = !sortReverse">
+								Forecast Category Name
+								<span ng-show="sortType == 'ForecastCategoryName' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'ForecastCategoryName' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a ng-click="sortType = 'Fiscal'; sortReverse = !sortReverse">
+								Fiscal
+								<span ng-show="sortType == 'Fiscal' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'Fiscal' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>Team</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="opport in opportunities | orderBy:sortType:sortReverse | filter:search" ng-if="opport.IsClosed === showClosedOpport">
+						<th>{{opport.CreatedDate | date}}</th>
+						<td>{{opport.Name}}</td>
+						<td>{{opport.StageName}}</td>
+						<td>{{opport.Amount | isoCurrency : opport.CurrencyIsoCode}}</td>
+						<td>{{opport.ForecastCategory}}</td>
+						<td>{{opport.ForecastCategoryName}}</td>
+						<td>{{opport.Fiscal}}</td>
+						<td>
+							<div ng-repeat="member in opport.OpportunityTeamMembers.records">
+								{{member.Name}}
+								:
+								{{member.TeamMemberRole}}
+							</div>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>

@@ -13,10 +13,14 @@
 	<div class="x_content">
 		<div class="col-md-12">
 			<form class="form-inline">
+				<div class="form-group">
+					<label class="sr-only" for="search">Search</label>
+					<input type="text" class="form-control" id="search" placeholder="Search" ng-model="search">
+				</div>
 				<div class="checkbox">
 					<label>
-						Show closed opportunity
 						<input type="checkbox" ng-model="showClosedOpport">
+						Show closed opportunity
 					</label>
 				</div>
 			</form>
@@ -79,12 +83,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="opport in opportunities | orderBy:sortType:sortReverse" ng-if="opport.IsClosed === showClosedOpport">
+					<tr ng-repeat="opport in opportunities | orderBy:sortType:sortReverse | filter:search" ng-if="opport.IsClosed === showClosedOpport">
 						<th>{{opport.CreatedDate | date}}</th>
 						<td>{{opport.Name}}</td>
 						<td>{{opport.StageName}}</td>
-						<td>{{opport.Amount}}
-							{{opport.CurrencyIsoCode}}</td>
+						<td>{{opport.Amount | isoCurrency : opport.CurrencyIsoCode}}</td>
 						<td>{{opport.ForecastCategory}}</td>
 						<td>{{opport.ForecastCategoryName}}</td>
 						<td>{{opport.Fiscal}}</td>

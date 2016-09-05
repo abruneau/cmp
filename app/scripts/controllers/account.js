@@ -54,8 +54,9 @@ angular.module('cmpApp').controller('AccountCtrl', function ($scope, $routeParam
 	$scope.account = Accounts.selected;
 	$scope.opportunities = Accounts.opportunities;
 	$scope.showClosedOpport = false;
-	$scope.sortReverse  = true;  // set the default sort order
-	$scope.sortType     = 'CreatedDate'; // set the default sort type
+	$scope.sortReverse = true; // set the default sort order
+	$scope.sortType = 'CreatedDate'; // set the default sort type
+	$scope.search = ''; // set the default search/filter term
 
 	/**
 	 * Update opportunities for an account

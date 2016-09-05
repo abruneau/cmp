@@ -18,7 +18,8 @@ angular
 		'ngTouch',
 		'ui.bootstrap',
 		'angular.filter',
-		'ui.bootstrap.datetimepicker'
+		'ui.bootstrap.datetimepicker',
+		'isoCurrency'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider

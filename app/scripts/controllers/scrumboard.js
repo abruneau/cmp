@@ -13,7 +13,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 
 	var totalcolumns = 0;
 	var keyTrap = null;
-	var currentTheme = "bigcards";
+	var currentTheme = "big";
 
 	function onCardChange(id, text) {
 		$("#" + id).children('.content:first').text(text);
@@ -52,12 +52,12 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 
 		if (Array.isArray(stickerId)) {
 			for (var i in stickerId) {
-				stickerContainer.prepend('<img src="images/stickers/' + stickerId[i] +
-					'.png">');
+				stickerContainer.prepend('<div class="sticker" id="' + stickerId[i] +
+					'"></div>');
 			}
 		} else {
 			if (stickerContainer.html().indexOf(stickerId) < 0) {
-				stickerContainer.prepend('<img src="images/stickers/' + stickerId + '.png">');
+				stickerContainer.prepend('<div class="sticker" id="' + stickerId + '"></div>');
 			}
 		}
 
@@ -74,9 +74,8 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 	function drawNewCard(id, text, x, y, rot, colour, sticker, animationspeed) {
 
 		var h = '<div id="' + id + '" class="card ' + colour +
-			' draggable" style="-webkit-transform:rotate(' + rot +
-			'deg);"><img src="images/icons/token/Xion.png" class="card-icon delete-card-icon" /><img class="card-image" src="images/' +
-			colour + '-card.png"><div id="content:' + id +
+			' draggable big" style="-webkit-transform:rotate(' + rot +
+			'deg);"><div class="card-icon delete-card-icon fa fa-times fa-2x"></div><div id="content:' + id +
 			'" class="content stickertarget droppable">' +
 			text + '</div><span class="filler"></span></div>';
 
@@ -220,6 +219,7 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 
 		Scrumboard.columns.list[index] = text;
 		Scrumboard.update(Scrumboard.columns);
+
 	}
 
 	function drawNewColumn(columnName) {
@@ -267,8 +267,9 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 	}
 
 	function changeThemeTo(theme) {
+		$("." + currentTheme).addClass(theme);
+		$("." + theme).removeClass(currentTheme);
 		currentTheme = theme;
-		$("link[title=cardsize]").attr("href", "styles/" + theme + ".css");
 	}
 
 	$(".sticker").draggable({
@@ -362,16 +363,16 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 		var id = 'card-' + Math.round(Math.random() * 99999999); //is this big enough to assure uniqueness?
 		var text = 'Double click to edit';
 		var x = 5;
-		var y = 100; // hack - not a great way to get the new card coordinates, but most consistant ATM
+		var y = 65; // hack - not a great way to get the new card coordinates, but most consistant ATM
 		var colour = randomCardColour();
 		drawNewCard(id, text, x, y, rot, colour);
 		var card = {
-			id,
-			text,
-			x,
-			y,
-			rot,
-			colour,
+			id: id,
+			text: text,
+			x: x,
+			y: y,
+			rot: rot,
+			colour: colour,
 			attributes: {
 				type: 'Scrumboard-card'
 			}
@@ -381,10 +382,10 @@ angular.module('cmpApp').controller('ScrumboardCtrl', function ($scope, Scrumboa
 	};
 
 	$scope.changeStyle = function () {
-		if (currentTheme === "bigcards") {
-			changeThemeTo('smallcards');
-		} else if (currentTheme === "smallcards") {
-			changeThemeTo('bigcards');
+		if (currentTheme === "big") {
+			changeThemeTo('small');
+		} else if (currentTheme === "small") {
+			changeThemeTo('big');
 		}
 	};
 

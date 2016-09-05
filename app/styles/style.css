@@ -4,7 +4,7 @@
 	color: #333;
 	background-color: #ddd;
 	xbackground-image: -webkit-gradient(radial, 265 118, 456, 147 0, 29, from(#DDDDDD), to(#f3f3f3));
-	background-image: url('bg/concrete_wall_2_2.png');
+	background-image: url('../images/concrete_wall_2_2.png');
 }
 
 #board {
@@ -68,6 +68,10 @@ width: 16px; height: 16px;
 
 .card-icon-hover {
 	opacity: .9;
+}
+
+.delete-card-icon {
+	color: black;
 }
 
 .card-edit-form, .card-edit-form input, .card-edit-form textarea {

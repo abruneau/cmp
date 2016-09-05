@@ -77,13 +77,28 @@ angular.module('cmpApp').factory('Scrumboard', function (database) {
 	};
 
 	self.update = function (obj) {
-		database.update({
-			_id: obj._id
-		}, obj, {}, function (err) {
-			if (err) {
-				console.log(err);
-			}
-		});
+
+		if (obj.attributes.type === 'Scrumboard-card') {
+			database.update({
+				id: obj.id
+			}, obj, {}, function (err) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(obj);
+				}
+			});
+		} else {
+			database.update({
+				_id: obj._id
+			}, obj, {}, function (err) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(obj);
+				}
+			});
+		}
 	};
 
 	self.del = function (obj) {

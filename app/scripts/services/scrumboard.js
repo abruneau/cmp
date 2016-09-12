@@ -94,8 +94,6 @@ angular.module('cmpApp').factory('Scrumboard', function (database) {
 			}, obj, {}, function (err) {
 				if (err) {
 					console.log(err);
-				} else {
-					console.log(obj);
 				}
 			});
 		}

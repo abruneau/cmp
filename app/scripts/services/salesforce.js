@@ -62,7 +62,6 @@ angular.module('cmpApp').factory('salesForce', function (database, Accounts) {
 				} else {
 					self.connected = true;
 					notifyObservers();
-					console.log("Sf connection success");
 				}
 
 			});

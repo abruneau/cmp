@@ -44,6 +44,7 @@ module.exports = function(config) {
       'bower_components/simpleWeather/jquery.simpleWeather.js',
       'bower_components/jeditable/jquery.jeditable.js',
       'bower_components/jquery-ui/jquery-ui.js',
+      'bower_components/isoCurrency/dist/isoCurrency.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
